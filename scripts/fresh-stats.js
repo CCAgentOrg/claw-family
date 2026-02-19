@@ -1,137 +1,149 @@
 #!/usr/bin/env node
 
 /**
- * Fetch fresh GitHub stats for AI agent frameworks
- * Updates stats.json with latest data from GitHub API
+ * Fetch fresh GitHub stats for Claw family frameworks
  */
 
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// Real GitHub repos to fetch
-const repos = [
-    'openai/swarm',
-    'nanobot-ai/nanobot',
-    'gptscript-ai/gptscript',
-    'microsoft/autogen',
-    'langchain-ai/langgraph',
-    'openinterpreter/open-interpreter'
+// Claw family frameworks
+const REPOS = [
+  { owner: 'openclaw', repo: 'openclaw', name: 'OpenClaw' },
+  { owner: 'sipeed', repo: 'picoclaw', name: 'PicoClaw' },
+  { owner: 'zeroclaw-labs', repo: 'zeroclaw', name: 'ZeroClaw' },
+  { owner: 'nanobot-ai', repo: 'nanobot', name: 'nanobot' },
+  { owner: 'openclaw', repo: 'clawhub', name: 'ClawHub' }
 ];
 
-// Stats file path
-const statsPath = path.join(__dirname, '..', 'stats.json');
+// Fetch GitHub repo data
+function fetchGitHubData(owner, repo) {
+  return new Promise((resolve, reject) => {
+    const options = {
+      hostname: 'api.github.com',
+      path: `/repos/${owner}/${repo}`,
+      method: 'GET',
+      headers: {
+        'User-Agent': 'nanobot-claw-microsite',
+        'Accept': 'application/vnd.github.v3+json'
+      }
+    };
 
-// Fetch from GitHub API
-function fetchGitHubStats(repo) {
-    return new Promise((resolve, reject) => {
-        const options = {
-            hostname: 'api.github.com',
-            path: `/repos/${repo}`,
-            method: 'GET',
-            headers: {
-                'User-Agent': 'ai-agent-frameworks-microsite',
-                'Accept': 'application/vnd.github.v3+json'
-            }
-        };
+    const req = https.request(options, (res) => {
+      let data = '';
 
-        const req = https.request(options, (res) => {
-            let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
 
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            res.on('end', () => {
-                if (res.statusCode === 200) {
-                    try {
-                        const json = JSON.parse(data);
-                        resolve({
-                            repo: repo,
-                            stars: json.stargazers_count,
-                            forks: json.forks_count,
-                            language: json.language,
-                            size: json.size
-                        });
-                    } catch (error) {
-                        reject(new Error(`Failed to parse JSON for ${repo}: ${error.message}`));
-                    }
-                } else {
-                    reject(new Error(`HTTP ${res.statusCode} for ${repo}`));
-                }
-            });
-        });
-
-        req.on('error', (error) => {
-            reject(new Error(`Request failed for ${repo}: ${error.message}`));
-        });
-
-        req.setTimeout(10000, () => {
-            req.destroy();
-            reject(new Error(`Timeout for ${repo}`));
-        });
-
-        req.end();
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          try {
+            resolve(JSON.parse(data));
+          } catch (e) {
+            reject(new Error(`Failed to parse JSON for ${owner}/${repo}`));
+          }
+        } else {
+          reject(new Error(`HTTP ${res.statusCode} for ${owner}/${repo}`));
+        }
+      });
     });
+
+    req.on('error', (err) => {
+      reject(err);
+    });
+
+    req.setTimeout(10000, () => {
+      req.destroy();
+      reject(new Error(`Timeout for ${owner}/${repo}`));
+    });
+
+    req.end();
+  });
 }
 
 // Main function
 async function main() {
-    console.log('🔄 Fetching fresh GitHub stats...\n');
+  console.log('🔄 Fetching fresh GitHub stats...');
+  console.log('');
 
-    const stats = {};
-    let successCount = 0;
-    let failCount = 0;
+  const results = {};
+  let successCount = 0;
+  let failCount = 0;
 
-    for (const repo of repos) {
-        try {
-            process.stdout.write(`Fetching ${repo}... `);
-            const data = await fetchGitHubStats(repo);
-            stats[repo] = {
-                stars: data.stars,
-                forks: data.forks,
-                language: data.language,
-                size: data.size
-            };
-            console.log(`✅ ${data.stars.toLocaleString()} stars, ${data.forks.toLocaleString()} forks`);
-            successCount++;
-        } catch (error) {
-            console.log(`❌ ${error.message}`);
-            failCount++;
-            // Keep existing stats if fetch fails
-            if (fs.existsSync(statsPath)) {
-                const existingStats = JSON.parse(fs.readFileSync(statsPath, 'utf8'));
-                if (existingStats[repo]) {
-                    stats[repo] = existingStats[repo];
-                    console.log(`   Using cached stats for ${repo}`);
-                }
-            }
+  for (const framework of REPOS) {
+    try {
+      const data = await fetchGitHubData(framework.owner, framework.repo);
+
+      results[framework.repo] = {
+        name: framework.name,
+        owner: framework.owner,
+        repo: framework.repo,
+        stars: data.stargazers_count || 0,
+        forks: data.forks_count || 0,
+        language: data.language || 'Unknown',
+        size: data.size || 0,
+        description: data.description || ''
+      };
+
+      console.log(`✓ ${framework.owner}/${framework.repo} - ${data.stargazers_count.toLocaleString()} stars`);
+      successCount++;
+    } catch (err) {
+      console.log(`✗ ${framework.owner}/${framework.repo} - ${err.message}`);
+
+      // Keep existing data if fetch fails
+      try {
+        const existingPath = path.join(__dirname, '..', 'stats.json');
+        const existing = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
+        if (existing.frameworks && existing.frameworks[framework.repo]) {
+          results[framework.repo] = existing.frameworks[framework.repo];
+          console.log(`  Using cached data for ${framework.repo}`);
         }
+      } catch (e) {
+        // If no cached data, create placeholder
+        results[framework.repo] = {
+          name: framework.name,
+          owner: framework.owner,
+          repo: framework.repo,
+          stars: 0,
+          forks: 0,
+          language: 'Unknown',
+          size: 0,
+          description: 'Failed to fetch'
+        };
+      }
+      failCount++;
     }
+  }
 
-    console.log(`\n📊 Results: ${successCount} succeeded, ${failCount} failed`);
+  console.log('');
+  console.log(`📊 Results: ${successCount} succeeded, ${failCount} failed`);
 
-    // Write to stats.json
-    fs.writeFileSync(statsPath, JSON.stringify(stats, null, 2));
-    console.log(`✅ Updated ${statsPath}`);
+  // Save to stats.json
+  const outputPath = path.join(__dirname, '..', 'stats.json');
+  const stats = {
+    frameworks: results,
+    last_updated: new Date().toISOString(),
+    source: 'GitHub API'
+  };
 
-    // Summary
-    console.log('\n📈 Summary:');
-    console.log('───────────────────────────────────────────────');
-    console.log('Framework              Stars      Forks      Lang');
-    console.log('───────────────────────────────────────────────');
-    for (const [repo, data] of Object.entries(stats)) {
-        const name = repo.split('/')[1].padEnd(20);
-        const stars = data.stars.toLocaleString().padStart(10);
-        const forks = data.forks.toLocaleString().padStart(10);
-        const lang = (data.language || 'N/A').padStart(10);
-        console.log(`${name}${stars}${forks}${lang}`);
-    }
-    console.log('───────────────────────────────────────────────');
+  fs.writeFileSync(outputPath, JSON.stringify(stats, null, 2));
+  console.log(`✅ Updated ${outputPath}`);
+
+  // Print summary table
+  console.log('');
+  console.log('📈 Summary:');
+  console.log('───────────────────────────────────────────────');
+  console.log('Framework              Stars      Forks      Lang');
+  console.log('───────────────────────────────────────────────');
+  for (const [key, framework] of Object.entries(results)) {
+    const stars = (framework.stars || 0).toLocaleString().padStart(10);
+    const forks = (framework.forks || 0).toLocaleString().padStart(10);
+    const lang = (framework.language || 'Unknown').padStart(10);
+    console.log(`${framework.name.padEnd(20)} ${stars} ${forks} ${lang}`);
+  }
+  console.log('───────────────────────────────────────────────');
 }
 
-// Run
-main().catch(error => {
-    console.error('❌ Fatal error:', error.message);
-    process.exit(1);
-});
+main().catch(console.error);

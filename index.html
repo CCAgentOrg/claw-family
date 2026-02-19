@@ -46,7 +46,7 @@
                 <li><strong>OpenClaw</strong> - Full-featured personal AI assistant (200K+ GitHub stars)</li>
                 <li><strong>PicoClaw</strong> - Ultra-lightweight Go agent for embedded devices</li>
                 <li><strong>ZeroClaw</strong> - Rust-based, security-first runtime</li>
-                <li><strong>nanobot</strong> - Minimalist Python assistant for chat platforms</li>
+                <li><strong>nanobot</strong> - Go-based MCP host for building AI agents</li>
                 <li><strong>ClawHub</strong> - The skill registry powering the ecosystem</li>
             </ul>
         </section>
@@ -99,14 +99,14 @@
                         <li>Tool system with 5,700+ community skills via ClawHub</li>
                         <li>Local-first gateway architecture</li>
                     </ul>
-                    <pre><code># Install OpenClaw
-curl -fsSL https://openclaw.ai/install.sh | bash
+                    <pre><code># Install OpenClaw (requires Node >= 22)
+npm install -g openclaw@latest
 
-# Initialize your assistant
-openclaw init my-assistant
+# Run onboarding wizard
+openclaw onboard --install-daemon
 
 # Start the gateway
-openclaw gateway start</code></pre>
+openclaw gateway --port 18789</code></pre>
                 </div>
 
                 <div class="scenario">
@@ -118,13 +118,15 @@ openclaw gateway start</code></pre>
                         <li>95% AI-generated code with human refinement</li>
                         <li>Fast boot times (~1 second)</li>
                     </ul>
-                    <pre><code# Install PicoClaw (single binary)
-curl -fsSL https://picoclaw.ai/install.sh | bash
+                    <pre><code># Download binary from releases
+wget https://github.com/sipeed/picoclaw/releases/latest/download/picoclaw-linux-amd64
+chmod +x picoclaw-linux-amd64
+./picoclaw-linux-amd64
 
-# Or download binary for your platform
-wget https://github.com/sipeed/picoclaw/releases/latest/download/picoclaw-linux-arm64
-chmod +x picoclaw-linux-arm64
-./picoclaw-linux-arm64</code></pre>
+# Or build from source
+git clone https://github.com/sipeed/picoclaw.git
+cd picoclaw
+make build</code></pre>
                 </div>
 
                 <div class="scenario">
@@ -134,35 +136,37 @@ chmod +x picoclaw-linux-arm64
                         <li>Rust-based, 400x faster startup than alternatives</li>
                         <li>Memory-safe, sandboxed execution</li>
                         <li>Zero-trust architecture with explicit permissions</li>
-                        <li>Runs as system daemon with <10ms cold start</li>
+                        <li>Runs on $10 hardware with <5MB RAM</li>
                     </ul>
-                    <pre><code># Install ZeroClaw
+                    <pre><code># Clone and bootstrap
+git clone https://github.com/zeroclaw-labs/zeroclaw.git
+cd zeroclaw
+./bootstrap.sh
+
+# Or install with cargo
 cargo install zeroclaw
 
-# Or use pre-built binary
-curl -fsSL https://zeroclaw.net/install.sh | bash
-
-# Start the daemon
-zeroclad daemon start</code></pre>
+# Run onboarding
+zeroclad onboard</code></pre>
                 </div>
 
                 <div class="scenario">
-                    <h3>💬 I want a simple WhatsApp/Telegram bot assistant</h3>
+                    <h3>🤖 I want to build MCP agents and hosts</h3>
                     <p><strong>Best choice:</strong> <a href="#nanobot" class="framework-link">nanobot</a></p>
                     <ul>
-                        <li>Python-based, minimal setup</li>
-                        <li>WhatsApp and Telegram out of the box</li>
-                        <li>Skills system for extensibility</li>
-                        <li>Can run on VPS with minimal resources</li>
+                        <li>Go-based MCP host for building AI agents</li>
+                        <li>Standalone deployment - integrate into any application</li>
+                        <li>Supports OpenAI and Anthropic models</li>
+                        <li>Configurable via YAML or directory-based structure</li>
+                        <li>Web UI at http://localhost:8080</li>
                     </ul>
                     <pre><code># Install nanobot
-pip install nanobot-ai
+brew install nanobot-ai/tap/nanobot
 
-# Initialize
-nanobot init my-bot
+# Create configuration (nanobot.yaml)
+nanobot run ./nanobot.yaml
 
-# Configure credentials and run
-nanobot run</code></pre>
+# Web UI available at http://localhost:8080</code></pre>
                 </div>
 
                 <div class="scenario">
@@ -244,7 +248,7 @@ clawhub list</code></pre>
                     </tr>
                     <tr>
                         <td>nanobot</td>
-                        <td>Python</td>
+                        <td>Go</td>
                         <td>⚠️ Optional</td>
                         <td>✅ Yes</td>
                         <td>✅ Yes</td>

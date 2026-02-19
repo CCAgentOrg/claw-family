@@ -4,31 +4,31 @@
       "name": "OpenClaw",
       "owner": "openclaw",
       "repo": "openclaw",
-      "stars": 211390,
-      "forks": 39138,
+      "stars": 211406,
+      "forks": 39145,
       "language": "TypeScript",
       "size": 208130,
-      "description": "Full-featured personal AI assistant with multi-channel support"
+      "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞"
     },
     "picoclaw": {
       "name": "PicoClaw",
       "owner": "sipeed",
       "repo": "picoclaw",
-      "stars": 16333,
-      "forks": 1864,
+      "stars": 16338,
+      "forks": 1865,
       "language": "Go",
       "size": 17059,
-      "description": "Ultra-lightweight Go agent for embedded devices"
+      "description": "Tiny, Fast, and Deployable anywhere — automate the mundane, unleash your creativity"
     },
     "zeroclaw": {
       "name": "ZeroClaw",
       "owner": "zeroclaw-labs",
       "repo": "zeroclaw",
-      "stars": 14911,
+      "stars": 14920,
       "forks": 1559,
       "language": "Rust",
       "size": 7400,
-      "description": "Rust-based, security-first AI agent runtime"
+      "description": "Fast, small, and fully autonomous AI assistant infrastructure — deploy anywhere, swap anything 🦀"
     },
     "nanobot": {
       "name": "nanobot",
@@ -38,19 +38,19 @@
       "forks": 148,
       "language": "Go",
       "size": 3007,
-      "description": "Minimalist Python assistant for chat platforms"
+      "description": "Build MCP Agents - MCP host for AI agents"
     },
     "clawhub": {
       "name": "ClawHub",
       "owner": "openclaw",
       "repo": "clawhub",
-      "stars": 2351,
-      "forks": 541,
+      "stars": 2353,
+      "forks": 542,
       "language": "TypeScript",
       "size": 1881,
-      "description": "Skill registry for Claw family agents"
+      "description": "Skill Directory for OpenClaw"
     }
   },
-  "last_updated": "2026-02-19T19:49:00Z",
+  "last_updated": "2026-02-19T19:59:00Z",
   "source": "GitHub API"
 }

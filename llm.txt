@@ -10,60 +10,61 @@ The Claw Family microsite (https://ccagentorg.github.io/ai-agent-frameworks/) is
 
 ### OpenClaw
 - **GitHub:** https://github.com/openclaw/openclaw
-- **Stars:** 211,390
+- **Stars:** 211,406
 - **Language:** TypeScript
 - **Size:** 208 MB
-- **Description:** Full-featured personal AI assistant with multi-channel support (WhatsApp, Telegram, Discord, Slack, Signal, iMessage, etc.)
+- **Description:** Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞
 - **Key Features:**
   - Multi-agent routing with isolated workspaces
   - Local-first gateway architecture
   - Tool system with 5,700+ community skills via ClawHub
-  - Command: `openclaw init my-assistant` then `openclaw gateway start`
+  - Command: `npm install -g openclaw@latest` then `openclaw onboard --install-daemon`
 
 ### PicoClaw
 - **GitHub:** https://github.com/sipeed/picoclaw
-- **Stars:** 16,333
+- **Stars:** 16,338
 - **Language:** Go
 - **Size:** 17 MB
-- **Description:** Ultra-lightweight Go agent for embedded devices
+- **Description:** Tiny, Fast, and Deployable anywhere — automate the mundane, unleash your creativity
 - **Key Features:**
   - Runs on $10 hardware (Raspberry Pi Zero, old phones)
   - <10MB RAM footprint
   - 95% AI-generated code with human refinement
   - Fast boot times (~1 second)
-  - Command: Download binary and run directly
+  - Command: Download binary from releases and run, or build from source
 
 ### ZeroClaw
 - **GitHub:** https://github.com/zeroclaw-labs/zeroclaw
-- **Stars:** 14,911
+- **Stars:** 14,920
 - **Language:** Rust
 - **Size:** 7.4 MB
-- **Description:** Rust-based, security-first AI agent runtime
+- **Description:** Fast, small, and fully autonomous AI assistant infrastructure — deploy anywhere, swap anything 🦀
 - **Key Features:**
   - 400x faster startup than alternatives
   - Memory-safe, sandboxed execution
   - Zero-trust architecture with explicit permissions
-  - Runs as system daemon with <10ms cold start
-  - Command: `cargo install zeroclaw` or use pre-built binary
+  - Runs on $10 hardware with <5MB RAM
+  - Command: `git clone && ./bootstrap.sh` or `cargo install zeroclaw`
 
 ### nanobot
 - **GitHub:** https://github.com/nanobot-ai/nanobot
 - **Stars:** 1,014
-- **Language:** Go (core), Python (assistant)
+- **Language:** Go
 - **Size:** 3 MB
-- **Description:** Minimalist AI assistant for chat platforms
+- **Description:** Build MCP Agents - MCP host for AI agents
 - **Key Features:**
-  - WhatsApp and Telegram out of the box
-  - Skills system for extensibility
-  - Can run on VPS with minimal resources
-  - Command: `pip install nanobot-ai` then `nanobot init my-bot`
+  - Standalone MCP host for building AI agents
+  - Integrates MCP servers with LLMs
+  - Web UI at http://localhost:8080
+  - Supports OpenAI and Anthropic models
+  - Command: `brew install nanobot-ai/tap/nanobot` then `nanobot run ./nanobot.yaml`
 
 ### ClawHub
 - **GitHub:** https://github.com/openclaw/clawhub
-- **Stars:** 2,351
+- **Stars:** 2,353
 - **Language:** TypeScript
 - **Size:** 1.9 MB
-- **Description:** Skill registry for Claw family agents
+- **Description:** Skill Directory for OpenClaw
 - **Key Features:**
   - 5,700+ community-built skills
   - Vector search for skill discovery
@@ -133,7 +134,7 @@ Key principles:
 | Full-featured personal AI | OpenClaw |
 | Running on $10 hardware | PicoClaw |
 | Production security | ZeroClaw |
-| Simple WhatsApp/Telegram bot | nanobot |
+| Building MCP agents | nanobot |
 | Finding skills | ClawHub |
 
 ## File Structure

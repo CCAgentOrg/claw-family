@@ -20,25 +20,25 @@ The site features:
 
 | Framework | Stars | Language | Size | Best For |
 |-----------|-------|----------|------|----------|
-| [OpenClaw](https://github.com/openclaw/openclaw) | 211,390 ⭐ | TypeScript | 208 MB | Full-featured personal AI |
-| [PicoClaw](https://github.com/sipeed/picoclaw) | 16,333 ⭐ | Go | 17 MB | Running on $10 hardware |
-| [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) | 14,911 ⭐ | Rust | 7.4 MB | Production security |
-| [nanobot](https://github.com/nanobot-ai/nanobot) | 1,014 ⭐ | Go/Python | 3 MB | WhatsApp/Telegram bots |
-| [ClawHub](https://github.com/openclaw/clawhub) | 2,351 ⭐ | TypeScript | 1.9 MB | Finding AI skills |
+| [OpenClaw](https://github.com/openclaw/openclaw) | 211,406 ⭐ | TypeScript | 208 MB | Full-featured personal AI |
+| [PicoClaw](https://github.com/sipeed/picoclaw) | 16,338 ⭐ | Go | 17 MB | Running on $10 hardware |
+| [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) | 14,920 ⭐ | Rust | 7.4 MB | Production security |
+| [nanobot](https://github.com/nanobot-ai/nanobot) | 1,014 ⭐ | Go | 3 MB | Building MCP agents |
+| [ClawHub](https://github.com/openclaw/clawhub) | 2,353 ⭐ | TypeScript | 1.9 MB | Finding AI skills |
 
 ## 🎯 Quick Start
 
 ### OpenClaw - Full-Featured Personal AI
 
 ```bash
-# Install
-curl -fsSL https://openclaw.ai/install.sh | bash
+# Install (requires Node >= 22)
+npm install -g openclaw@latest
 
-# Initialize
-openclaw init my-assistant
+# Run onboarding wizard
+openclaw onboard --install-daemon
 
-# Start gateway
-openclaw gateway start
+# Start the gateway
+openclaw gateway --port 18789
 ```
 
 **Best for:** Complete personal AI setup with multi-channel support (WhatsApp, Telegram, Discord, Slack, etc.)
@@ -57,32 +57,33 @@ chmod +x picoclaw-linux-arm64
 ### ZeroClaw - Security-First Rust Runtime
 
 ```bash
-# Install via Cargo
+# Clone and bootstrap
+git clone https://github.com/zeroclaw-labs/zeroclaw.git
+cd zeroclaw
+./bootstrap.sh
+
+# Or install with cargo
 cargo install zeroclaw
 
-# Or use pre-built binary
-curl -fsSL https://zeroclaw.net/install.sh | bash
-
-# Start daemon
-zeroclad daemon start
+# Run onboarding
+zeroclad onboard
 ```
 
-**Best for:** Production, security-critical deployments (400x faster startup)
+**Best for:** Production, security-critical deployments (<5MB RAM, 400x faster startup)
 
-### nanobot - Minimal Chat Bot Assistant
+### nanobot - MCP Host for AI Agents
 
 ```bash
-# Install
-pip install nanobot-ai
+# Install via Homebrew
+brew install nanobot-ai/tap/nanobot
 
-# Initialize
-nanobot init my-bot
+# Create configuration
+nanobot run ./nanobot.yaml
 
-# Run
-nanobot run
+# Web UI available at http://localhost:8080
 ```
 
-**Best for:** Simple WhatsApp/Telegram bots with minimal setup
+**Best for:** Building MCP agents and hosts for AI applications
 
 ### ClawHub - Skill Registry
 
