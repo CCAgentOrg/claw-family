@@ -1,22 +1,38 @@
 {
-  "openclaw": {
-    "stars": 211358,
-    "forks": 39123,
-    "updated_at": "2026-02-15T00:00:00Z"
+  "openai/swarm": {
+    "stars": 20976,
+    "forks": 2235,
+    "language": "Python",
+    "size": 499
   },
-  "nanobot": {
-    "stars": 21846,
-    "forks": 3352,
-    "updated_at": "2026-02-19T00:00:00Z"
+  "nanobot-ai/nanobot": {
+    "stars": 1014,
+    "forks": 148,
+    "language": "Go",
+    "size": 3007
   },
-  "picoclaw": {
-    "stars": 16330,
-    "forks": 1861,
-    "updated_at": "2026-02-10T00:00:00Z"
+  "gptscript-ai/gptscript": {
+    "stars": 3268,
+    "forks": 292,
+    "language": "Go",
+    "size": 5234
   },
-  "zeroclaw": {
-    "stars": 14901,
-    "forks": 1559,
-    "updated_at": "2026-02-12T00:00:00Z"
+  "microsoft/autogen": {
+    "stars": 54648,
+    "forks": 8229,
+    "language": "Python",
+    "size": 148202
+  },
+  "langchain-ai/langgraph": {
+    "stars": 24844,
+    "forks": 4342,
+    "language": "Python",
+    "size": 507812
+  },
+  "openinterpreter/open-interpreter": {
+    "stars": 62251,
+    "forks": 5354,
+    "language": "Python",
+    "size": 100533
   }
 }

@@ -1,0 +1,6 @@
+# Cloudflare Workers/Pages Config
+# Not strictly needed for static site, but useful for edge functions later
+
+name = "claw-microsite"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."

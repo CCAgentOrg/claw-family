@@ -1,220 +1,250 @@
-// GitHub repository configuration
-const REPOSITORIES = {
-    openclaw: { owner: 'openclaw', repo: 'openclaw' },
-    nanobot: { owner: 'nanobot-ai', repo: 'nanobot' },
-    picoclaw: { owner: 'picoclaw', repo: 'picoclaw' },
-    zeroclaw: { owner: 'zeroclaw', repo: 'zeroclaw' }
+// AI Agent Frameworks Microsite
+// Auto-updates from GitHub API with caching
+
+// Framework configurations with real GitHub repos
+const frameworks = [
+    {
+        id: 'swarm',
+        name: 'OpenAI Swarm',
+        description: 'Lightweight multi-agent orchestration by OpenAI',
+        language: 'Python',
+        size: '499',
+        repo: 'openai/swarm',
+        website: 'https://github.com/openai/swarm',
+        bestFor: 'Simple multi-agent coordination',
+        icon: '🐝'
+    },
+    {
+        id: 'nanobot',
+        name: 'nanobot',
+        description: 'Personal AI assistant for chat platforms',
+        language: 'Python',
+        size: '33',
+        repo: 'nanobot-ai/nanobot',
+        website: 'https://github.com/nanobot-ai/nanobot',
+        bestFor: 'Personal assistants, WhatsApp bots',
+        icon: '🤖'
+    },
+    {
+        id: 'gptscript',
+        name: 'GPTScript',
+        description: 'Go-based AI scripting framework',
+        language: 'Go',
+        size: '5234',
+        repo: 'gptscript-ai/gptscript',
+        website: 'https://github.com/gptscript-ai/gptscript',
+        bestFor: 'Enterprise scripting, Go developers',
+        icon: '⚡'
+    },
+    {
+        id: 'autogen',
+        name: 'AutoGen',
+        description: 'Multi-agent conversation framework by Microsoft',
+        language: 'Python',
+        size: '148202',
+        repo: 'microsoft/autogen',
+        website: 'https://github.com/microsoft/autogen',
+        bestFor: 'Complex multi-agent workflows',
+        icon: '🤝'
+    },
+    {
+        id: 'langgraph',
+        name: 'LangGraph',
+        description: 'Stateful multi-actor applications',
+        language: 'Python',
+        size: '507812',
+        repo: 'langchain-ai/langgraph',
+        website: 'https://github.com/langchain-ai/langgraph',
+        bestFor: 'Graph-based workflows',
+        icon: '🔗'
+    },
+    {
+        id: 'interpreter',
+        name: 'Open Interpreter',
+        description: 'Code execution agent',
+        language: 'Python',
+        size: '100533',
+        repo: 'openinterpreter/open-interpreter',
+        website: 'https://github.com/openinterpreter/open-interpreter',
+        bestFor: 'Code execution, data analysis',
+        icon: '💻'
+    }
+];
+
+// Fallback stats for offline mode
+const fallbackStats = {
+    'openai/swarm': { stars: 20976, forks: 2235 },
+    'nanobot-ai/nanobot': { stars: 1014, forks: 148 },
+    'gptscript-ai/gptscript': { stars: 3268, forks: 292 },
+    'microsoft/autogen': { stars: 54648, forks: 8229 },
+    'langchain-ai/langgraph': { stars: 24844, forks: 4342 },
+    'openinterpreter/open-interpreter': { stars: 62251, forks: 5354 }
 };
 
-// Cache configuration
-const CACHE_KEY = 'claw-stats';
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour
-
-// DOM Elements
-const statCards = document.querySelectorAll('.stat-card');
-const liveIndicator = document.getElementById('live-indicator');
-const statusDot = liveIndicator.querySelector('.status-dot');
-const statusText = liveIndicator.querySelector('.status-text');
-const lastUpdatedEl = document.getElementById('last-updated');
-const dataSourceEl = document.getElementById('data-source');
+// Cache duration: 1 hour
+const CACHE_DURATION = 60 * 60 * 1000;
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
-    initStats();
+document.addEventListener('DOMContentLoaded', async () => {
     updateLastUpdated();
+    
+    try {
+        const stats = await fetchStats();
+        renderFrameworks(stats);
+        renderComparisonTable(stats);
+        updateLiveIndicator(true, stats);
+    } catch (error) {
+        console.warn('Using fallback stats:', error.message);
+        renderFrameworks(fallbackStats);
+        renderComparisonTable(fallbackStats);
+        updateLiveIndicator(false, fallbackStats);
+    }
 });
 
-// Initialize stats display
-async function initStats() {
-    const cached = getCachedStats();
-
-    if (cached && !isCacheExpired(cached.timestamp)) {
-        // Use cached data
-        displayStats(cached.data);
-        updateStatus('cached', `Using cached data (${getCacheAge(cached.timestamp)})`);
-        dataSourceEl.textContent = 'Source: Cache (GitHub API)';
-        dataSourceEl.className = 'data-source cached';
-    } else {
-        // Fetch fresh data
-        try {
-            const stats = await fetchStats();
-            if (stats) {
-                displayStats(stats);
-                cacheStats(stats);
-                updateStatus('live', 'Live data from GitHub API');
-                dataSourceEl.textContent = 'Source: GitHub API';
-                dataSourceEl.className = 'data-source live';
-            } else {
-                throw new Error('Failed to fetch stats');
-            }
-        } catch (error) {
-            console.error('Error fetching stats:', error);
-            if (cached) {
-                displayStats(cached.data);
-                updateStatus('cached', `Using expired cache (${getCacheAge(cached.timestamp)})`);
-                dataSourceEl.textContent = 'Source: Expired cache (API unavailable)';
-                dataSourceEl.className = 'data-source cached';
-            } else {
-                loadFallbackStats();
-                updateStatus('offline', 'Using fallback data (API unavailable)');
-                dataSourceEl.textContent = 'Source: Fallback data';
-                dataSourceEl.className = 'data-source offline';
-            }
-        }
-    }
+// Update last updated time
+function updateLastUpdated() {
+    const now = new Date();
+    document.getElementById('lastUpdated').textContent = now.toLocaleString();
 }
 
-// Fetch stats from GitHub API
+// Fetch stats from GitHub API with caching
 async function fetchStats() {
-    const stats = {};
-
-    for (const [key, config] of Object.entries(REPOSITORIES)) {
-        try {
-            const response = await fetch(
-                `https://api.github.com/repos/${config.owner}/${config.repo}`,
-                {
-                    headers: {
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                }
-            );
-
-            if (response.ok) {
-                const data = await response.json();
-                stats[key] = {
-                    stars: data.stargazers_count,
-                    forks: data.forks_count,
-                    updated_at: data.updated_at
-                };
-            } else {
-                console.warn(`Failed to fetch ${key}: ${response.status}`);
-                stats[key] = null;
-            }
-        } catch (error) {
-            console.error(`Error fetching ${key}:`, error);
-            stats[key] = null;
+    // Check cache first
+    const cached = localStorage.getItem('frameworkStats');
+    if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_DURATION) {
+            console.log('Using cached stats from', new Date(timestamp).toLocaleString());
+            updateLiveIndicator(true, data, true);
+            return data;
         }
     }
+
+    // Fetch from GitHub API
+    const stats = {};
+    const errors = [];
+
+    for (const framework of frameworks) {
+        try {
+            const response = await fetch(`https://api.github.com/repos/${framework.repo}`);
+            if (response.ok) {
+                const data = await response.json();
+                stats[framework.repo] = {
+                    stars: data.stargazers_count,
+                    forks: data.forks_count,
+                    language: data.language
+                };
+            } else {
+                throw new Error(`HTTP ${response.status}`);
+            }
+        } catch (error) {
+            console.warn(`Failed to fetch ${framework.repo}:`, error);
+            errors.push(framework.repo);
+            // Use fallback for failed repos
+            if (fallbackStats[framework.repo]) {
+                stats[framework.repo] = fallbackStats[framework.repo];
+            }
+        }
+    }
+
+    // Cache the results
+    localStorage.setItem('frameworkStats', JSON.stringify({
+        data: stats,
+        timestamp: Date.now()
+    }));
 
     return stats;
 }
 
-// Display stats in the UI
-function displayStats(stats) {
-    statCards.forEach(card => {
-        const framework = card.dataset.framework;
-        const frameworkStats = stats[framework];
+// Render framework cards
+function renderFrameworks(stats) {
+    const grid = document.getElementById('frameworkGrid');
+    
+    grid.innerHTML = frameworks.map(fw => {
+        const stat = stats[fw.repo] || { stars: 'N/A', forks: 'N/A' };
+        const formattedSize = formatSize(fw.size);
+        
+        return `
+            <div class="framework-card" id="${fw.id}">
+                <div class="framework-icon">${fw.icon}</div>
+                <h3 class="framework-name">${fw.name}</h3>
+                <p class="framework-description">${fw.description}</p>
+                <div class="framework-stats">
+                    <div class="stat">
+                        <span class="stat-icon">⭐</span>
+                        <span class="stat-value">${formatNumber(stat.stars)}</span>
+                        <span class="stat-label">stars</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">🔱</span>
+                        <span class="stat-value">${formatNumber(stat.forks)}</span>
+                        <span class="stat-label">forks</span>
+                    </div>
+                </div>
+                <div class="framework-details">
+                    <span class="framework-language">${fw.language}</span>
+                    <span class="framework-size">${formattedSize}</span>
+                </div>
+                <a href="${fw.website}" target="_blank" class="framework-link">
+                    View on GitHub →
+                </a>
+            </div>
+        `;
+    }).join('');
+}
 
-        if (frameworkStats) {
-            const starsEl = card.querySelector('[data-type="stars"]');
-            const forksEl = card.querySelector('[data-type="forks"]');
+// Render comparison table
+function renderComparisonTable(stats) {
+    const tbody = document.querySelector('#comparisonTable tbody');
+    
+    tbody.innerHTML = frameworks.map(fw => {
+        const stat = stats[fw.repo] || { stars: 'N/A', forks: 'N/A' };
+        const formattedSize = formatSize(fw.size);
+        
+        return `
+            <tr>
+                <td><strong>${fw.icon} ${fw.name}</strong></td>
+                <td>${formatNumber(stat.stars)}</td>
+                <td>${formatNumber(stat.forks)}</td>
+                <td><span class="language-badge ${fw.language.toLowerCase()}">${fw.language}</span></td>
+                <td>${formattedSize}</td>
+                <td>${fw.bestFor}</td>
+            </tr>
+        `;
+    }).join('');
+}
 
-            starsEl.textContent = formatNumber(frameworkStats.stars);
-            forksEl.textContent = formatNumber(frameworkStats.forks);
-            starsEl.classList.remove('loading', 'error');
-            forksEl.classList.remove('loading', 'error');
-        } else {
-            const starsEl = card.querySelector('[data-type="stars"]');
-            const forksEl = card.querySelector('[data-type="forks"]');
-
-            starsEl.textContent = 'N/A';
-            forksEl.textContent = 'N/A';
-            starsEl.classList.add('error');
-            forksEl.classList.add('error');
-        }
-    });
+// Update live indicator
+function updateLiveIndicator(isLive, stats, isCached = false) {
+    const indicator = document.getElementById('liveIndicator');
+    const statusText = indicator.querySelector('.status-text');
+    
+    if (isCached) {
+        statusText.textContent = 'Live data (cached)';
+    } else if (isLive) {
+        statusText.textContent = 'Live data';
+    } else {
+        statusText.textContent = 'Offline mode';
+    }
 }
 
 // Format large numbers
 function formatNumber(num) {
-    if (num === null || num === undefined) return 'Loading...';
-
-    if (num >= 1000000) {
-        return (num / 1000000).toFixed(1) + 'M';
-    } else if (num >= 1000) {
-        return (num / 1000).toFixed(1) + 'K';
-    }
+    if (typeof num !== 'number') return num;
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
     return num.toString();
 }
 
-// Cache functions
-function cacheStats(data) {
-    const cache = {
-        timestamp: Date.now(),
-        data: data
-    };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+// Format repository size
+function formatSize(kb) {
+    const num = parseInt(kb, 10);
+    if (num >= 1024 * 1024) return (num / (1024 * 1024)).toFixed(1) + ' GB';
+    if (num >= 1024) return (num / 1024).toFixed(1) + ' MB';
+    return num + ' KB';
 }
 
-function getCachedStats() {
-    const cached = localStorage.getItem(CACHE_KEY);
-    return cached ? JSON.parse(cached) : null;
+// Export for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { frameworks, fetchStats, formatNumber, formatSize };
 }
-
-function isCacheExpired(timestamp) {
-    return Date.now() - timestamp > CACHE_DURATION;
-}
-
-function getCacheAge(timestamp) {
-    const minutes = Math.floor((Date.now() - timestamp) / 60000);
-    if (minutes < 60) {
-        return `${minutes}m ago`;
-    } else {
-        const hours = Math.floor(minutes / 60);
-        return `${hours}h ago`;
-    }
-}
-
-// Update status indicator
-function updateStatus(status, message) {
-    liveIndicator.className = `live-indicator ${status}`;
-    statusText.textContent = message;
-}
-
-// Update last updated timestamp
-function updateLastUpdated() {
-    const now = new Date();
-    lastUpdatedEl.textContent = now.toLocaleString();
-}
-
-// Load fallback stats from stats.json
-async function loadFallbackStats() {
-    try {
-        const response = await fetch('stats.json');
-        if (response.ok) {
-            const data = await response.json();
-            displayStats(data);
-        }
-    } catch (error) {
-        console.error('Error loading fallback stats:', error);
-        // Hardcoded fallback
-        displayStats({
-            openclaw: { stars: 211358, forks: 39123 },
-            nanobot: { stars: 21846, forks: 3352 },
-            picoclaw: { stars: 16330, forks: 1861 },
-            zeroclaw: { stars: 14901, forks: 1559 }
-        });
-    }
-}
-
-// Refresh stats (can be called manually)
-async function refreshStats() {
-    updateStatus('live', 'Fetching fresh data...');
-    try {
-        const stats = await fetchStats();
-        displayStats(stats);
-        cacheStats(stats);
-        updateStatus('live', 'Live data from GitHub API');
-        dataSourceEl.textContent = 'Source: GitHub API';
-        dataSourceEl.className = 'data-source live';
-        updateLastUpdated();
-    } catch (error) {
-        console.error('Error refreshing stats:', error);
-        updateStatus('offline', 'Failed to fetch fresh data');
-        dataSourceEl.textContent = 'Source: Error';
-        dataSourceEl.className = 'data-source offline';
-    }
-}
-
-// Make refresh available globally
-window.refreshStats = refreshStats;

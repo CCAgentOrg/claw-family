@@ -1,73 +1,49 @@
 #!/usr/bin/env node
 
 /**
- * Check if infographics exist and report their status
- * Usage: node check-infographics.js
+ * Check that all infographics exist and are valid
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const INFOGRAPHICS = [
+// Required infographics
+const requiredInfographics = [
     'claw-stars-verified.gif',
     'claw-size-verified.gif',
     'claw-timeline-verified.gif',
-    'claw-features-verified.gif'
+    'claw-features-verified.gif',
+    'claw-decision-verified.gif'
 ];
 
-const ROOT = path.resolve(__dirname, '..');
+// Root directory
+const rootDir = path.join(__dirname, '..');
 
-function checkFile(filePath) {
-    try {
-        const stats = fs.statSync(filePath);
-        return {
-            exists: true,
-            size: stats.size,
-            modified: stats.mtime
-        };
-    } catch (error) {
-        return {
-            exists: false,
-            size: 0,
-            modified: null
-        };
-    }
-}
+console.log('Checking infographics...\n');
 
-function formatSize(bytes) {
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
+let allPresent = true;
 
-function main() {
-    console.log('Checking infographics...\n');
-
-    let allExist = true;
-
-    for (const gif of INFOGRAPHICS) {
-        const filePath = path.join(ROOT, gif);
-        const status = checkFile(filePath);
-
-        if (status.exists) {
-            console.log(`✓ ${gif}`);
-            console.log(`  Size: ${formatSize(status.size)}`);
-            console.log(`  Modified: ${status.modified.toISOString()}\n`);
-        } else {
-            console.log(`✗ ${gif} - NOT FOUND\n`);
-            allExist = false;
-        }
-    }
-
-    if (allExist) {
-        console.log('All infographics are present!');
-        process.exit(0);
+for (const filename of requiredInfographics) {
+    const filepath = path.join(rootDir, filename);
+    
+    if (fs.existsSync(filepath)) {
+        const stats = fs.statSync(filepath);
+        const sizeKB = (stats.size / 1024).toFixed(2);
+        const modified = stats.mtime.toISOString();
+        
+        console.log(`✓ ${filename}`);
+        console.log(`  Size: ${sizeKB} KB`);
+        console.log(`  Modified: ${modified}\n`);
     } else {
-        console.error('Some infographics are missing!');
-        process.exit(1);
+        console.log(`✗ ${filename} - MISSING\n`);
+        allPresent = false;
     }
 }
 
-main();
+if (allPresent) {
+    console.log('All infographics are present!');
+    process.exit(0);
+} else {
+    console.log('Some infographics are missing. Please create them using x-gif-maker.');
+    process.exit(1);
+}

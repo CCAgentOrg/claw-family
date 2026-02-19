@@ -1,30 +1,34 @@
 {
-  "name": "claw-microsite",
+  "name": "ai-agent-frameworks-microsite",
   "version": "1.0.0",
-  "description": "Auto-updating microsite for the Claw family of AI agent frameworks",
+  "description": "A modern, auto-updating comparison website for AI agent frameworks",
   "main": "index.html",
   "scripts": {
     "start": "npx serve -p 3000",
-    "build": "npm run build:check && npm run build:stats",
-    "build:check": "node scripts/check-infographics.js",
-    "build:stats": "node scripts/fresh-stats.js > stats.json",
+    "build": "npm run check:infographics && npm run fetch:stats",
+    "check:infographics": "node scripts/check-infographics.js",
+    "fetch:stats": "node scripts/fresh-stats.js",
     "test": "node scripts/test-api.js",
-    "deploy:vercel": "vercel --prod",
-    "deploy:netlify": "netlify deploy --prod"
+    "deploy:cloudflare": "npx wrangler pages deploy . --project-name=ai-agent-frameworks",
+    "deploy:vercel": "npx vercel",
+    "deploy:netlify": "npx netlify deploy --prod",
+    "deploy:gh-pages": "npx gh-pages -d ."
   },
   "keywords": [
-    "claw",
     "ai",
-    "agent",
-    "openclaw",
+    "agents",
+    "frameworks",
+    "comparison",
+    "openai-swarm",
     "nanobot",
-    "picoclaw",
-    "zeroclaw",
-    "microsite"
+    "gptscript",
+    "autogen",
+    "langgraph",
+    "open-interpreter"
   ],
-  "author": "Claw Community",
+  "author": "",
   "license": "MIT",
   "devDependencies": {
-    "serve": "^14.2.1"
+    "serve": "^14.2.0"
   }
 }
