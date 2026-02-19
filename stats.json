@@ -1,0 +1,22 @@
+{
+  "openclaw": {
+    "stars": 211358,
+    "forks": 39123,
+    "updated_at": "2026-02-15T00:00:00Z"
+  },
+  "nanobot": {
+    "stars": 21846,
+    "forks": 3352,
+    "updated_at": "2026-02-19T00:00:00Z"
+  },
+  "picoclaw": {
+    "stars": 16330,
+    "forks": 1861,
+    "updated_at": "2026-02-10T00:00:00Z"
+  },
+  "zeroclaw": {
+    "stars": 14901,
+    "forks": 1559,
+    "updated_at": "2026-02-12T00:00:00Z"
+  }
+}

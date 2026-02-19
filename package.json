@@ -1,0 +1,30 @@
+{
+  "name": "claw-microsite",
+  "version": "1.0.0",
+  "description": "Auto-updating microsite for the Claw family of AI agent frameworks",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -p 3000",
+    "build": "npm run build:check && npm run build:stats",
+    "build:check": "node scripts/check-infographics.js",
+    "build:stats": "node scripts/fresh-stats.js > stats.json",
+    "test": "node scripts/test-api.js",
+    "deploy:vercel": "vercel --prod",
+    "deploy:netlify": "netlify deploy --prod"
+  },
+  "keywords": [
+    "claw",
+    "ai",
+    "agent",
+    "openclaw",
+    "nanobot",
+    "picoclaw",
+    "zeroclaw",
+    "microsite"
+  ],
+  "author": "Claw Community",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
