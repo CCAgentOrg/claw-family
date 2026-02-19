@@ -1,38 +1,56 @@
 {
-  "openai/swarm": {
-    "stars": 20976,
-    "forks": 2235,
-    "language": "Python",
-    "size": 499
+  "frameworks": {
+    "openclaw": {
+      "name": "OpenClaw",
+      "owner": "openclaw",
+      "repo": "openclaw",
+      "stars": 211390,
+      "forks": 39138,
+      "language": "TypeScript",
+      "size": 208130,
+      "description": "Full-featured personal AI assistant with multi-channel support"
+    },
+    "picoclaw": {
+      "name": "PicoClaw",
+      "owner": "sipeed",
+      "repo": "picoclaw",
+      "stars": 16333,
+      "forks": 1864,
+      "language": "Go",
+      "size": 17059,
+      "description": "Ultra-lightweight Go agent for embedded devices"
+    },
+    "zeroclaw": {
+      "name": "ZeroClaw",
+      "owner": "zeroclaw-labs",
+      "repo": "zeroclaw",
+      "stars": 14911,
+      "forks": 1559,
+      "language": "Rust",
+      "size": 7400,
+      "description": "Rust-based, security-first AI agent runtime"
+    },
+    "nanobot": {
+      "name": "nanobot",
+      "owner": "nanobot-ai",
+      "repo": "nanobot",
+      "stars": 1014,
+      "forks": 148,
+      "language": "Go",
+      "size": 3007,
+      "description": "Minimalist Python assistant for chat platforms"
+    },
+    "clawhub": {
+      "name": "ClawHub",
+      "owner": "openclaw",
+      "repo": "clawhub",
+      "stars": 2351,
+      "forks": 541,
+      "language": "TypeScript",
+      "size": 1881,
+      "description": "Skill registry for Claw family agents"
+    }
   },
-  "nanobot-ai/nanobot": {
-    "stars": 1014,
-    "forks": 148,
-    "language": "Go",
-    "size": 3007
-  },
-  "gptscript-ai/gptscript": {
-    "stars": 3268,
-    "forks": 292,
-    "language": "Go",
-    "size": 5234
-  },
-  "microsoft/autogen": {
-    "stars": 54648,
-    "forks": 8229,
-    "language": "Python",
-    "size": 148202
-  },
-  "langchain-ai/langgraph": {
-    "stars": 24844,
-    "forks": 4342,
-    "language": "Python",
-    "size": 507812
-  },
-  "openinterpreter/open-interpreter": {
-    "stars": 62251,
-    "forks": 5354,
-    "language": "Python",
-    "size": 100533
-  }
+  "last_updated": "2026-02-19T19:49:00Z",
+  "source": "GitHub API"
 }

@@ -1,157 +1,176 @@
-# AI Agent Frameworks Microsite
+# llm.txt - AI Context for The Claw Family Microsite
 
-This file provides context for AI assistants understanding this project.
+This file provides AI assistants with context about The Claw Family microsite project.
 
-## Overview
+## Project Overview
 
-This is a comparison and guide website for AI agent frameworks. It helps developers and users choose the right framework for building personal AI assistants.
+The Claw Family microsite (https://ccagentorg.github.io/ai-agent-frameworks/) is a comprehensive guide to the open-source AI agent frameworks known collectively as "The Claw Family."
 
-## Featured Frameworks
+## The Claw Family Frameworks
 
-### 1. OpenAI Swarm
-- **Repo**: openai/swarm
-- **Language**: Python
-- **Stars**: ~21,000
-- **Size**: 499 KB
-- **Description**: Lightweight multi-agent orchestration framework by OpenAI
-- **Best For**: Simple multi-agent coordination with minimal overhead
-- **Key Features**: Handoffs, function calling, state management
+### OpenClaw
+- **GitHub:** https://github.com/openclaw/openclaw
+- **Stars:** 211,390
+- **Language:** TypeScript
+- **Size:** 208 MB
+- **Description:** Full-featured personal AI assistant with multi-channel support (WhatsApp, Telegram, Discord, Slack, Signal, iMessage, etc.)
+- **Key Features:**
+  - Multi-agent routing with isolated workspaces
+  - Local-first gateway architecture
+  - Tool system with 5,700+ community skills via ClawHub
+  - Command: `openclaw init my-assistant` then `openclaw gateway start`
 
-### 2. nanobot
-- **Repo**: nanobot-ai/nanobot
-- **Language**: Python
-- **Stars**: ~1,000
-- **Size**: 33 KB
-- **Description**: Personal AI assistant for chat platforms (WhatsApp, Telegram, Discord)
-- **Best For**: Personal assistants, chat bots, lightweight deployments
-- **Key Features**: Multi-channel support, skills system, memory management
+### PicoClaw
+- **GitHub:** https://github.com/sipeed/picoclaw
+- **Stars:** 16,333
+- **Language:** Go
+- **Size:** 17 MB
+- **Description:** Ultra-lightweight Go agent for embedded devices
+- **Key Features:**
+  - Runs on $10 hardware (Raspberry Pi Zero, old phones)
+  - <10MB RAM footprint
+  - 95% AI-generated code with human refinement
+  - Fast boot times (~1 second)
+  - Command: Download binary and run directly
 
-### 3. GPTScript
-- **Repo**: gptscript-ai/gptscript
-- **Language**: Go
-- **Stars**: ~3,300
-- **Size**: 5.2 MB
-- **Description**: Go-based AI scripting framework with natural language tool definitions
-- **Best For**: Enterprise scripting, Go developers, production deployments
-- **Key Features**: Natural language tool definitions, fast execution, enterprise-ready
+### ZeroClaw
+- **GitHub:** https://github.com/zeroclaw-labs/zeroclaw
+- **Stars:** 14,911
+- **Language:** Rust
+- **Size:** 7.4 MB
+- **Description:** Rust-based, security-first AI agent runtime
+- **Key Features:**
+  - 400x faster startup than alternatives
+  - Memory-safe, sandboxed execution
+  - Zero-trust architecture with explicit permissions
+  - Runs as system daemon with <10ms cold start
+  - Command: `cargo install zeroclaw` or use pre-built binary
 
-### 4. AutoGen
-- **Repo**: microsoft/autogen
-- **Language**: Python
-- **Stars**: ~55,000
-- **Size**: 148 MB
-- **Description**: Multi-agent conversation framework by Microsoft
-- **Best For**: Complex multi-agent workflows, research applications
-- **Key Features**: Conversational agents, code execution, human-in-the-loop
+### nanobot
+- **GitHub:** https://github.com/nanobot-ai/nanobot
+- **Stars:** 1,014
+- **Language:** Go (core), Python (assistant)
+- **Size:** 3 MB
+- **Description:** Minimalist AI assistant for chat platforms
+- **Key Features:**
+  - WhatsApp and Telegram out of the box
+  - Skills system for extensibility
+  - Can run on VPS with minimal resources
+  - Command: `pip install nanobot-ai` then `nanobot init my-bot`
 
-### 5. LangGraph
-- **Repo**: langchain-ai/langgraph
-- **Language**: Python
-- **Stars**: ~25,000
-- **Size**: 508 MB
-- **Description**: Stateful multi-actor applications with graph-based orchestration
-- **Best For**: Graph-based workflows, LangChain ecosystem users
-- **Key Features**: State management, graph visualization, persistence
+### ClawHub
+- **GitHub:** https://github.com/openclaw/clawhub
+- **Stars:** 2,351
+- **Language:** TypeScript
+- **Size:** 1.9 MB
+- **Description:** Skill registry for Claw family agents
+- **Key Features:**
+  - 5,700+ community-built skills
+  - Vector search for skill discovery
+  - CLI for easy installation
+  - Community moderation and automated scanning
+  - Commands: `clawhub search "query"`, `clawhub install skill-name`, `clawhub list`
 
-### 6. Open Interpreter
-- **Repo**: openinterpreter/open-interpreter
-- **Language**: Python
-- **Stars**: ~62,000
-- **Size**: 100 MB
-- **Description**: Code execution agent that runs code locally
-- **Best For**: Code execution, data analysis, development tasks
-- **Key Features**: Multi-language support, local execution, interactive mode
+## Tech Stack
 
-## Technical Implementation
+- **Frontend:** HTML5, CSS3, vanilla JavaScript
+- **Data Source:** GitHub API (with localStorage caching)
+- **Deployment:** GitHub Pages
+- **Organization:** CCAgentOrg
+- **Repository:** ai-agent-frameworks
 
-### Auto-Update System
-- Fetches live stats from GitHub API
-- Caches in localStorage for 1 hour
-- Falls back to stats.json for offline mode
-- Shows "(live)", "(cached)", or "(offline)" indicator
+## Microsite Features
 
-### Frontend Stack
-- **HTML5**: Semantic markup
-- **CSS3**: Custom dark theme, responsive design
-- **JavaScript**: Vanilla JS, no frameworks
+1. **Auto-updating GitHub Stats** - Fetches live star/fork counts via GitHub API
+2. **Smart Caching** - 1-hour localStorage cache for performance
+3. **Offline Fallback** - Uses stats.json when API is unavailable
+4. **Comparison Table** - Side-by-side framework comparison
+5. **Quick Start Guide** - Scenario-based recommendations
+6. **Security Advisory** - Documents Moltbook incident and malicious skill
+7. **Animated Infographics** - 5 GIFs visualizing comparisons and timeline
 
-### Deployment Options
-- Cloudflare Pages (recommended)
-- Vercel
-- Netlify
-- GitHub Pages
+## Security Incidents
 
-## Security Notes
+### Moltbook Database Exposure (January 2026)
+- **What happened:** A public Moltbook instance exposed user data due to misconfigured database settings
+- **Impact:** User messages and potentially sensitive data were publicly accessible
+- **Mitigation:** Use `openclaw doctor` to audit configuration before deployment
+- **Source:** 404 Media, Cisco Blogs
 
-AI agents execute code and access data. Users should:
-- Review tool permissions before granting access
-- Sandbox code execution environments
-- Use environment variables for API keys
-- Implement rate limiting and access controls
-- Audit agent logs regularly
+### "What Would Elon Do?" Malicious Skill
+- **What happened:** A skill in ClawHub silently collected user data
+- **Impact:** Privacy violation for affected users
+- **Mitigation:** Review skill code before installing, especially from untrusted authors
+- **Source:** Cisco Blogs
+
+## Claw Family Philosophy
+
+The Claw family shares a common philosophy: **personal AI that you own and control.** 
+
+Key principles:
+1. **Local-first** - Run on your own hardware when possible
+2. **Open source** - MIT licensed, community-driven
+3. **Extensible** - Plugin/skill system for customization
+4. **Privacy-focused** - You control your data
+5. **Lobster-themed** - The family mascot is a space lobster named Molty
+
+## History Timeline
+
+- **2024 Q4** - Clawd created by Peter Steinberger
+- **2025 January** - Clawd renamed to Moltbot (lobster theme)
+- **2025 January 27** - Moltbot goes viral (100K+ stars in weeks)
+- **2025 January 29** - Anthropic trademark claim → renamed to OpenClaw
+- **2025 February 15** - Peter Steinberger joins OpenAI (Reuters, CNBC)
+- **2025 Q2** - PicoClaw launches (Go-based, <10MB)
+- **2025 Q3** - ZeroClaw launches (Rust-based, security-first)
+- **2025 Q4** - ClawHub reaches 5,000+ skills
+- **2026** - OpenClaw reaches 200K+ stars, ecosystem continues to grow
+
+## Quick Decision Guide
+
+| Use Case | Recommended Framework |
+|----------|----------------------|
+| Full-featured personal AI | OpenClaw |
+| Running on $10 hardware | PicoClaw |
+| Production security | ZeroClaw |
+| Simple WhatsApp/Telegram bot | nanobot |
+| Finding skills | ClawHub |
 
 ## File Structure
 
 ```
 claw-microsite/
-├── index.html          # Main site
-├── styles.css          # Styling
-├── script.js           # Auto-update logic
+├── index.html          # Main site content
+├── styles.css          # Responsive dark theme
+├── script.js           # GitHub API integration
 ├── llm.txt             # This file
-├── stats.json          # Fallback stats
+├── stats.json          # Fallback GitHub stats
 ├── package.json        # NPM scripts
 ├── README.md           # Documentation
-├── DEPLOYMENT.md       # Deployment guide
-├── _headers            # Cloudflare headers
-├── _redirects          # Cloudflare redirects
-├── wrangler.toml       # Cloudflare config
-├── vercel.json         # Vercel config
-├── netlify.toml        # Netlify config
-└── claw-*-verified.gif # Animated infographics
+├── .nojekyll           # GitHub Pages fix
+└── *-verified.gif      # Animated infographics (5 files)
 ```
 
-## Quick Start Commands
+## Deployment
 
-```bash
-# Install dependencies
-npm install
+The site is deployed to GitHub Pages at:
+https://ccagentorg.github.io/ai-agent-frameworks/
 
-# Local development
-npm start
+It auto-deploys on push to the main branch via GitHub Actions.
 
-# Check infographics
-npm run check:infographics
+## Contributing
 
-# Build and check
-npm run build
+This is a community resource. To contribute:
+1. Fork the repository
+2. Make your changes
+3. Submit a pull request
 
-# Test GitHub API
-npm run test
+## AI Assistant Usage Notes
 
-# Deploy to Cloudflare Pages
-npm run deploy:cloudflare
-
-# Deploy to Vercel
-npm run deploy:vercel
-
-# Deploy to Netlify
-npm run deploy:netlify
-```
-
-## Usage Guidelines
-
-When helping users with this site:
-1. Refer to specific framework IDs (swarm, nanobot, gptscript, autogen, langgraph, interpreter)
-2. Check stats.json for current fallback values
-3. Use deployment commands from DEPLOYMENT.md
-4. Verify infographics exist before deployment
-
-## Related Resources
-
-- GitHub API: https://api.github.com/repos/{owner}/{repo}
-- Documentation links in index.html under #resources section
-- Community discussion links for each framework
-
-## Last Updated
-
-2026-02-19 - Real frameworks added (OpenAI Swarm, nanobot, GPTScript, AutoGen, LangGraph, Open Interpreter)
+When assisting with this project:
+- Always verify GitHub stats using the GitHub API before making claims
+- Security incidents are documented in the "Security" section of the site
+- The Claw family includes OpenClaw, PicoClaw, ZeroClaw, nanobot, and ClawHub
+- All frameworks are open-source and share the "personal AI ownership" philosophy
+- GitHub org: CCAgentOrg
+- Repo: ai-agent-frameworks

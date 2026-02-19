@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent Frameworks - Personal AI Assistant Guide</title>
-    <meta name="description" content="Compare OpenAI Swarm, nanobot, GPTScript, AutoGen, and other AI agent frameworks for building personal AI assistants.">
+    <title>The Claw Family - AI Agent Framework Guide</title>
+    <meta name="description" content="OpenClaw, PicoClaw, ZeroClaw, nanobot - The Claw family of open-source AI agent frameworks. Compare features, choose the right one for your needs.">
+    <meta name="keywords" content="OpenClaw, PicoClaw, ZeroClaw, nanobot, AI agent, personal assistant, open source">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav>
-        <a href="#" class="logo">🤖 AI Agents</a>
+        <a href="#" class="logo">🦞 The Claw Family</a>
         <div class="nav-links">
+            <a href="#frameworks">Frameworks</a>
             <a href="#comparison">Compare</a>
             <a href="#quickstart">Quick Start</a>
+            <a href="#clawhub">ClawHub</a>
             <a href="#resources">Resources</a>
-            <a href="#faq">FAQ</a>
         </div>
     </nav>
 
     <header>
         <div class="hero">
-            <h1>AI Agent Frameworks</h1>
-            <p class="tagline">Build your personal AI assistant</p>
-            <p class="subtitle">Compare, choose, and deploy - all in one place</p>
+            <h1>The Claw Family 🦞</h1>
+            <p class="tagline">Open-Source AI Agent Frameworks</p>
+            <p class="subtitle">From full-featured personal assistants to ultra-lightweight runtimes</p>
             <div class="live-indicator" id="liveIndicator">
                 <span class="status-dot"></span>
                 <span class="status-text">Updating...</span>
@@ -30,14 +32,28 @@
         </div>
         <div class="hero-infographic">
             <img src="claw-stars-verified.gif" alt="GitHub Stars Comparison" class="infographic-img">
-            <p class="infographic-caption">GitHub stars comparison</p>
+            <p class="infographic-caption">GitHub stars comparison (live from GitHub API)</p>
         </div>
     </header>
 
     <main>
+        <!-- Intro Section -->
+        <section class="intro">
+            <h2>Welcome to the Claw Family</h2>
+            <p>The Claw family is a collection of open-source AI agent frameworks that share a common philosophy: <strong>personal AI that you own and control</strong>.</p>
+            <p>Each member of the family serves a different use case:</p>
+            <ul>
+                <li><strong>OpenClaw</strong> - Full-featured personal AI assistant (200K+ GitHub stars)</li>
+                <li><strong>PicoClaw</strong> - Ultra-lightweight Go agent for embedded devices</li>
+                <li><strong>ZeroClaw</strong> - Rust-based, security-first runtime</li>
+                <li><strong>nanobot</strong> - Minimalist Python assistant for chat platforms</li>
+                <li><strong>ClawHub</strong> - The skill registry powering the ecosystem</li>
+            </ul>
+        </section>
+
         <!-- Frameworks Grid -->
-        <section class="frameworks">
-            <h2>Popular Frameworks</h2>
+        <section id="frameworks" class="frameworks">
+            <h2>The Claw Family</h2>
             <div class="framework-grid" id="frameworkGrid">
                 <!-- Dynamically populated -->
             </div>
@@ -65,73 +81,113 @@
             </div>
             <div class="comparison-infographic">
                 <img src="claw-size-verified.gif" alt="Repository Size Comparison" class="infographic-img">
-                <p class="infographic-caption">Repository size comparison</p>
+                <p class="infographic-caption">Repository size comparison (smaller = more lightweight)</p>
             </div>
         </section>
 
         <!-- Quick Start Guide -->
         <section id="quickstart" class="quickstart">
-            <h2>Which Framework Should You Choose?</h2>
+            <h2>Which Claw Should You Choose?</h2>
             
             <div class="scenarios">
                 <div class="scenario">
-                    <h3>🎯 I want to build a simple personal assistant</h3>
-                    <p><strong>Best choice:</strong> <a href="#swarm" class="framework-link">OpenAI Swarm</a> or <a href="#nanobot" class="framework-link">nanobot</a></p>
+                    <h3>🦞 I want a full-featured personal AI assistant</h3>
+                    <p><strong>Best choice:</strong> <a href="#openclaw" class="framework-link">OpenClaw</a></p>
                     <ul>
-                        <li>Swarm: Multi-agent orchestration with minimal setup</li>
-                        <li>nanobot: Ultra-lightweight, WhatsApp-ready, personal use</li>
+                        <li>Multi-channel support (WhatsApp, Telegram, Discord, etc.)</li>
+                        <li>Multi-agent routing with isolated workspaces</li>
+                        <li>Tool system with 5,700+ community skills via ClawHub</li>
+                        <li>Local-first gateway architecture</li>
                     </ul>
-                    <pre><code># Swarm
-pip install swarm
-python -m swarm your_agent.py
+                    <pre><code># Install OpenClaw
+curl -fsSL https://openclaw.ai/install.sh | bash
 
-# nanobot
-npm install -g nanobot-ai
-nanobot init my-assistant</code></pre>
+# Initialize your assistant
+openclaw init my-assistant
+
+# Start the gateway
+openclaw gateway start</code></pre>
                 </div>
 
                 <div class="scenario">
-                    <h3>🤖 I need multi-agent collaboration</h3>
-                    <p><strong>Best choice:</strong> <a href="#autogen" class="framework-link">AutoGen</a> or <a href="#langgraph" class="framework-link">LangGraph</a></p>
+                    <h3>📱 I want to run AI on $10 hardware / old phones</h3>
+                    <p><strong>Best choice:</strong> <a href="#picoclaw" class="framework-link">PicoClaw</a></p>
                     <ul>
-                        <li>AutoGen: Conversational multi-agent framework by Microsoft</li>
-                        <li>LangGraph: Stateful workflows with graph-based orchestration</li>
+                        <li>Go-based, ultra-lightweight (<10MB RAM)</li>
+                        <li>Runs on Raspberry Pi Zero, old Android phones, embedded Linux</li>
+                        <li>95% AI-generated code with human refinement</li>
+                        <li>Fast boot times (~1 second)</li>
                     </ul>
-                    <pre><code># AutoGen
-pip install pyautogen
+                    <pre><code# Install PicoClaw (single binary)
+curl -fsSL https://picoclaw.ai/install.sh | bash
 
-# LangGraph
-pip install langgraph</code></pre>
+# Or download binary for your platform
+wget https://github.com/sipeed/picoclaw/releases/latest/download/picoclaw-linux-arm64
+chmod +x picoclaw-linux-arm64
+./picoclaw-linux-arm64</code></pre>
                 </div>
 
                 <div class="scenario">
-                    <h3>⚡ I want maximum performance (Go/Rust)</h3>
-                    <p><strong>Best choice:</strong> <a href="#gptscript" class="framework-link">GPTScript</a></p>
+                    <h3>🔒 I need security-first, production-grade infrastructure</h3>
+                    <p><strong>Best choice:</strong> <a href="#zeroclaw" class="framework-link">ZeroClaw</a></p>
                     <ul>
-                        <li>GPTScript: Go-based scripting with natural language tool definitions</li>
-                        <li>Fast, lightweight, enterprise-ready</li>
+                        <li>Rust-based, 400x faster startup than alternatives</li>
+                        <li>Memory-safe, sandboxed execution</li>
+                        <li>Zero-trust architecture with explicit permissions</li>
+                        <li>Runs as system daemon with <10ms cold start</li>
                     </ul>
-                    <pre><code># GPTScript
-brew install gptscript
-gptscript your-tools.gpt</code></pre>
+                    <pre><code># Install ZeroClaw
+cargo install zeroclaw
+
+# Or use pre-built binary
+curl -fsSL https://zeroclaw.net/install.sh | bash
+
+# Start the daemon
+zeroclad daemon start</code></pre>
                 </div>
 
                 <div class="scenario">
-                    <h3>🔧 I need code execution capabilities</h3>
-                    <p><strong>Best choice:</strong> <a href="#interpreter" class="framework-link">Open Interpreter</a></p>
+                    <h3>💬 I want a simple WhatsApp/Telegram bot assistant</h3>
+                    <p><strong>Best choice:</strong> <a href="#nanobot" class="framework-link">nanobot</a></p>
                     <ul>
-                        <li>Execute code locally in a controlled environment</li>
-                        <li>Support for Python, JavaScript, Shell, and more</li>
+                        <li>Python-based, minimal setup</li>
+                        <li>WhatsApp and Telegram out of the box</li>
+                        <li>Skills system for extensibility</li>
+                        <li>Can run on VPS with minimal resources</li>
                     </ul>
-                    <pre><code># Open Interpreter
-pip install open-interpreter
-interpreter</code></pre>
+                    <pre><code># Install nanobot
+pip install nanobot-ai
+
+# Initialize
+nanobot init my-bot
+
+# Configure credentials and run
+nanobot run</code></pre>
+                </div>
+
+                <div class="scenario">
+                    <h3>🧩 I want to find and use AI agent skills</h3>
+                    <p><strong>Best choice:</strong> <a href="#clawhub" class="framework-link">ClawHub</a></p>
+                    <ul>
+                        <li>5,700+ community-built skills</li>
+                        <li>Vector search for skill discovery</li>
+                        <li>CLI for easy installation</li>
+                        <li>Works with all Claw family frameworks</li>
+                    </ul>
+                    <pre><code># Search for skills
+clawhub search "weather forecast"
+
+# Install a skill
+clawhub install weather-skill
+
+# List installed skills
+clawhub list</code></pre>
                 </div>
             </div>
 
             <div class="decision-infographic">
                 <img src="claw-decision-verified.gif" alt="Decision Guide" class="infographic-img">
-                <p class="infographic-caption">Choose the right framework for your needs</p>
+                <p class="infographic-caption">Choose the right Claw for your needs</p>
             </div>
         </section>
 
@@ -139,56 +195,97 @@ interpreter</code></pre>
         <section id="security" class="security">
             <h2>🔒 Security Considerations</h2>
             <div class="security-alert">
-                <strong>⚠️ Important:</strong> AI agents often execute code and access sensitive data. Always:
+                <strong>⚠️ Moltbook Database Exposure (January 2026):</strong> A public Moltbook instance exposed user data due to misconfigured database settings. Always use `openclaw doctor` to audit your configuration before deployment.
+            </div>
+            <div class="security-alert">
+                <strong>⚠️ "What Would Elon Do?" Malicious Skill:</strong> A skill named "What Would Elon Do?" in ClawHub was found to silently collect user data. Always review skill code before installing, especially from untrusted authors.
             </div>
             <ul>
-                <li>Review tool permissions carefully before granting access</li>
-                <li>Sandbox code execution environments</li>
-                <li>Use environment variables for API keys (never hardcode)</li>
-                <li>Implement rate limiting and access controls</li>
-                <li>Audit agent logs regularly</li>
+                <li><strong>Review tool permissions</strong> - Only grant access to necessary systems</li>
+                <li><strong>Sandbox execution</strong> - Use containerized or sandboxed environments for code execution</li>
+                <li><strong>Audit skills</strong> - Review SKILL.md and source code before installation</li>
+                <li><strong>Secure configuration</strong> - Use `openclaw doctor` or similar tools to check configuration</li>
+                <li><strong>Keep updated</strong> - Install security updates promptly</li>
             </ul>
             <div class="framework-security">
                 <h3>Security Features by Framework</h3>
                 <table>
                     <tr>
                         <th>Framework</th>
+                        <th>Language Safety</th>
                         <th>Sandboxing</th>
                         <th>Tool Permissions</th>
                         <th>Audit Logs</th>
+                        <th>Config Check</th>
                     </tr>
                     <tr>
-                        <td>Swarm</td>
-                        <td>⚠️ Optional</td>
+                        <td>OpenClaw</td>
+                        <td>TypeScript</td>
+                        <td>✅ Optional</td>
                         <td>✅ Yes</td>
                         <td>✅ Yes</td>
+                        <td>✅ `openclaw doctor`</td>
                     </tr>
                     <tr>
-                        <td>AutoGen</td>
-                        <td>⚠️ Optional</td>
+                        <td>PicoClaw</td>
+                        <td>Go</td>
                         <td>✅ Yes</td>
                         <td>✅ Yes</td>
+                        <td>✅ Yes</td>
+                        <td>⚠️ Manual</td>
                     </tr>
                     <tr>
-                        <td>LangGraph</td>
-                        <td>⚠️ Optional</td>
+                        <td>ZeroClaw</td>
+                        <td>Rust ✅</td>
+                        <td>✅ Yes (default)</td>
+                        <td>✅ Explicit</td>
                         <td>✅ Yes</td>
-                        <td>✅ Yes</td>
+                        <td>✅ `zeroclad check`</td>
                     </tr>
                     <tr>
                         <td>nanobot</td>
+                        <td>Python</td>
+                        <td>⚠️ Optional</td>
                         <td>✅ Yes</td>
                         <td>✅ Yes</td>
-                        <td>✅ Yes</td>
-                    </tr>
-                    <tr>
-                        <td>GPTScript</td>
-                        <td>✅ Yes</td>
-                        <td>✅ Yes</td>
-                        <td>✅ Yes</td>
+                        <td>⚠️ Manual</td>
                     </tr>
                 </table>
             </div>
+        </section>
+
+        <!-- ClawHub Section -->
+        <section id="clawhub" class="clawhub">
+            <h2>🧩 ClawHub - The Skill Registry</h2>
+            <p>ClawHub is the central repository for AI agent skills. With 5,700+ community-built skills, it's the easiest way to extend your agent's capabilities.</p>
+            
+            <div class="clawhub-features">
+                <div class="feature">
+                    <h3>🔍 Vector Search</h3>
+                    <p>Find skills by functionality using semantic search. Describe what you need, and ClawHub will find matching skills.</p>
+                </div>
+                <div class="feature">
+                    <h3>📦 Easy Installation</h3>
+                    <p>One command to install skills. Dependencies are handled automatically.</p>
+                </div>
+                <div class="feature">
+                    <h3>⭐ Community Curated</h3>
+                    <p>Star ratings, reviews, and download counts help you find quality skills.</p>
+                </div>
+                <div class="feature">
+                    <h3>🛡️ Moderation</h3>
+                    <p>Automated scanning and community moderation helps prevent malicious skills.</p>
+                </div>
+            </div>
+
+            <pre><code># Popular skills to try:
+clawhub install weather-skill          # Weather forecasts
+clawhub install calendar-skill         # Calendar management
+clawhub install github-skill           # GitHub operations
+clawhub install spotify-skill          # Music control
+clawhub install code-review-skill      # Code review assistance</code></pre>
+
+            <p><a href="https://clawhub.ai" target="_blank">Visit ClawHub →</a></p>
         </section>
 
         <!-- Resources Section -->
@@ -196,30 +293,32 @@ interpreter</code></pre>
             <h2>Resources</h2>
             <div class="resources-grid">
                 <div class="resource-card">
-                    <h3>Documentation</h3>
+                    <h3>Official Documentation</h3>
                     <ul>
-                        <li><a href="https://github.com/openai/swarm" target="_blank">OpenAI Swarm Docs</a></li>
+                        <li><a href="https://openclaw.ai" target="_blank">OpenClaw Docs</a></li>
+                        <li><a href="https://picoclaw.ai" target="_blank">PicoClaw Docs</a></li>
+                        <li><a href="https://zeroclaw.net" target="_blank">ZeroClaw Docs</a></li>
                         <li><a href="https://github.com/nanobot-ai/nanobot" target="_blank">nanobot Docs</a></li>
-                        <li><a href="https://github.com/microsoft/autogen" target="_blank">AutoGen Docs</a></li>
-                        <li><a href="https://github.com/langchain-ai/langgraph" target="_blank">LangGraph Docs</a></li>
-                        <li><a href="https://github.com/gptscript-ai/gptscript" target="_blank">GPTScript Docs</a></li>
-                        <li><a href="https://github.com/openinterpreter/open-interpreter" target="_blank">Open Interpreter Docs</a></li>
+                        <li><a href="https://clawhub.ai" target="_blank">ClawHub</a></li>
                     </ul>
                 </div>
                 <div class="resource-card">
-                    <h3>Tutorials</h3>
+                    <h3>GitHub Repositories</h3>
                     <ul>
-                        <li><a href="https://github.com/openai/swarm/tree/main/examples" target="_blank">Swarm Examples</a></li>
-                        <li><a href="https://github.com/microsoft/autogen/tree/main/notebook" target="_blank">AutoGen Notebooks</a></li>
-                        <li><a href="https://github.com/langchain-ai/langgraph/tree/main/examples" target="_blank">LangGraph Examples</a></li>
+                        <li><a href="https://github.com/openclaw/openclaw" target="_blank">openclaw/openclaw</a></li>
+                        <li><a href="https://github.com/sipeed/picoclaw" target="_blank">sipeed/picoclaw</a></li>
+                        <li><a href="https://github.com/zeroclaw-labs/zeroclaw" target="_blank">zeroclaw-labs/zeroclaw</a></li>
+                        <li><a href="https://github.com/nanobot-ai/nanobot" target="_blank">nanobot-ai/nanobot</a></li>
+                        <li><a href="https://github.com/openclaw/clawhub" target="_blank">openclaw/clawhub</a></li>
                     </ul>
                 </div>
                 <div class="resource-card">
                     <h3>Community</h3>
                     <ul>
-                        <li><a href="https://github.com/openai/swarm/discussions" target="_blank">Swarm Discussions</a></li>
-                        <li><a href="https://github.com/microsoft/autogen/discussions" target="_blank">AutoGen Discussions</a></li>
-                        <li><a href="https://github.com/langchain-ai/langgraph/discussions" target="_blank">LangGraph Discussions</a></li>
+                        <li><a href="https://github.com/openclaw/openclaw/discussions" target="_blank">OpenClaw Discussions</a></li>
+                        <li><a href="https://github.com/sipeed/picoclaw/discussions" target="_blank">PicoClaw Discussions</a></li>
+                        <li><a href="https://github.com/zeroclaw-labs/zeroclaw/discussions" target="_blank">ZeroClaw Discussions</a></li>
+                        <li><a href="https://discord.gg/openclaw" target="_blank">OpenClaw Discord</a></li>
                     </ul>
                 </div>
             </div>
@@ -229,35 +328,61 @@ interpreter</code></pre>
         <section id="faq" class="faq">
             <h2>Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>What is an AI agent?</h3>
-                <p>An AI agent is a software system that uses large language models (LLMs) to perceive, reason, and act autonomously to accomplish goals. Agents can use tools, execute code, and interact with external systems.</p>
+                <h3>What is the Claw family?</h3>
+                <p>The Claw family is a collection of open-source AI agent frameworks that share a common philosophy of personal AI ownership. They originated from OpenClaw (formerly Clawd/Moltbot), which went viral in 2025 with its lobster-themed personal assistant.</p>
             </div>
             <div class="faq-item">
-                <h3>What's the difference between Swarm and LangGraph?</h3>
-                <p>Swarm is OpenAI's lightweight framework for multi-agent orchestration with minimal overhead. LangGraph is part of the LangChain ecosystem, offering stateful, graph-based workflows with more built-in integrations.</p>
+                <h3>What's the difference between OpenClaw and the others?</h3>
+                <p>OpenClaw is the full-featured "kitchen sink" framework with multi-channel support, multi-agent routing, and a local-first gateway. PicoClaw and ZeroClaw are focused, lightweight alternatives for specific use cases (embedded devices and production security, respectively).</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use ClawHub skills with any Claw framework?</h3>
+                <p>Yes! ClawHub skills are designed to work across the Claw family. While OpenClaw has the most complete integration, PicoClaw and ZeroClaw also support the skill format.</p>
             </div>
             <div class="faq-item">
                 <h3>Which framework is best for beginners?</h3>
-                <p>For beginners, we recommend starting with OpenAI Swarm or nanobot. Swarm has excellent documentation and simple patterns. nanobot is ideal if you want to run an assistant on chat platforms like WhatsApp.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Can I use multiple frameworks together?</h3>
-                <p>Yes! Many developers combine frameworks. For example, you might use LangGraph for orchestration and nanobot for delivery, or use Open Interpreter for code execution within an AutoGen conversation.</p>
+                <p>For beginners, we recommend starting with nanobot for simple chat bots or OpenClaw if you want full functionality. OpenClaw has excellent documentation and a large community. PicoClaw and ZeroClaw require more technical familiarity.</p>
             </div>
             <div class="faq-item">
                 <h3>Do I need to pay for API usage?</h3>
-                <p>Most frameworks connect to OpenAI, Anthropic, or other LLM providers. These APIs have associated costs. However, some frameworks (like nanobot with local models) can run completely offline with free models.</p>
+                <p>All Claw frameworks are open-source and free. However, they connect to LLM providers (OpenAI, Anthropic, etc.) which have associated costs. Some frameworks support local models for offline use.</p>
             </div>
+            <div class="faq-item">
+                <h3>Is the Claw family secure?</h3>
+                <p>The Claw family prioritizes security with tool permissions, audit logs, and configuration checking tools. However, like any AI agent framework, you should review skills before installation and use sandboxed environments for code execution. See the Security section above for details on past incidents.</p>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline">
+            <h2>Claw Family Timeline</h2>
+            <div class="timeline-infographic">
+                <img src="claw-timeline-verified.gif" alt="Timeline" class="infographic-img">
+                <p class="infographic-caption">Evolution of the Claw family</p>
+            </div>
+            <ul class="timeline-events">
+                <li><strong>2024 Q4</strong> - Clawd created by Peter Steinberger</li>
+                <li><strong>2025 January</strong> - Clawd renamed to Moltbot (lobster theme)</li>
+                <li><strong>2025 January 27</strong> - Moltbot goes viral (100K+ stars in weeks)</li>
+                <li><strong>2025 January 29</strong> - Anthropic trademark claim → renamed to OpenClaw</li>
+                <li><strong>2025 February 15</strong> - Peter Steinberger joins OpenAI</li>
+                <li><strong>2025 Q2</strong> - PicoClaw launches (Go-based, <10MB)</li>
+                <li><strong>2025 Q3</strong> - ZeroClaw launches (Rust-based, security-first)</li>
+                <li><strong>2025 Q4</strong> - ClawHub reaches 5,000+ skills</li>
+                <li><strong>2026</strong> - Ecosystem continues to grow with 200K+ OpenClaw stars</li>
+            </ul>
         </section>
     </main>
 
     <footer>
-        <p>Built with ❤️ for the AI agent community</p>
+        <p>🦞 The Claw Family - Open-Source AI Agent Frameworks</p>
         <p>Last updated: <span id="lastUpdated"></span> | Data source: GitHub API</p>
         <div class="footer-links">
-            <a href="https://github.com" target="_blank">GitHub</a>
+            <a href="https://github.com/CCAgentOrg/ai-agent-frameworks" target="_blank">GitHub</a>
             <span>|</span>
             <a href="/llm.txt" target="_blank">llm.txt</a>
+            <span>|</span>
+            <a href="https://clawhub.ai" target="_blank">ClawHub</a>
         </div>
     </footer>
 

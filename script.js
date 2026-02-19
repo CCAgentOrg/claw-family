@@ -1,250 +1,274 @@
-// AI Agent Frameworks Microsite
-// Auto-updates from GitHub API with caching
-
-// Framework configurations with real GitHub repos
+// The Claw Family - Real GitHub repositories
 const frameworks = [
     {
-        id: 'swarm',
-        name: 'OpenAI Swarm',
-        description: 'Lightweight multi-agent orchestration by OpenAI',
-        language: 'Python',
-        size: '499',
-        repo: 'openai/swarm',
-        website: 'https://github.com/openai/swarm',
-        bestFor: 'Simple multi-agent coordination',
-        icon: '🐝'
+        id: 'openclaw',
+        name: 'OpenClaw',
+        owner: 'openclaw',
+        repo: 'openclaw',
+        description: 'Full-featured personal AI assistant with multi-channel support',
+        language: 'TypeScript',
+        bestFor: 'Complete personal AI setup',
+        url: 'https://github.com/openclaw/openclaw',
+        docs: 'https://openclaw.ai'
+    },
+    {
+        id: 'picoclaw',
+        name: 'PicoClaw',
+        owner: 'sipeed',
+        repo: 'picoclaw',
+        description: 'Ultra-lightweight Go agent for embedded devices',
+        language: 'Go',
+        bestFor: 'Running on low-cost hardware',
+        url: 'https://github.com/sipeed/picoclaw',
+        docs: 'https://picoclaw.ai'
+    },
+    {
+        id: 'zeroclaw',
+        name: 'ZeroClaw',
+        owner: 'zeroclaw-labs',
+        repo: 'zeroclaw',
+        description: 'Rust-based, security-first AI agent runtime',
+        language: 'Rust',
+        bestFor: 'Production, security-critical deployments',
+        url: 'https://github.com/zeroclaw-labs/zeroclaw',
+        docs: 'https://zeroclaw.net'
     },
     {
         id: 'nanobot',
         name: 'nanobot',
-        description: 'Personal AI assistant for chat platforms',
-        language: 'Python',
-        size: '33',
-        repo: 'nanobot-ai/nanobot',
-        website: 'https://github.com/nanobot-ai/nanobot',
-        bestFor: 'Personal assistants, WhatsApp bots',
-        icon: '🤖'
-    },
-    {
-        id: 'gptscript',
-        name: 'GPTScript',
-        description: 'Go-based AI scripting framework',
+        owner: 'nanobot-ai',
+        repo: 'nanobot',
+        description: 'Minimalist Python assistant for chat platforms',
         language: 'Go',
-        size: '5234',
-        repo: 'gptscript-ai/gptscript',
-        website: 'https://github.com/gptscript-ai/gptscript',
-        bestFor: 'Enterprise scripting, Go developers',
-        icon: '⚡'
+        bestFor: 'WhatsApp/Telegram bots',
+        url: 'https://github.com/nanobot-ai/nanobot',
+        docs: 'https://github.com/nanobot-ai/nanobot'
     },
     {
-        id: 'autogen',
-        name: 'AutoGen',
-        description: 'Multi-agent conversation framework by Microsoft',
-        language: 'Python',
-        size: '148202',
-        repo: 'microsoft/autogen',
-        website: 'https://github.com/microsoft/autogen',
-        bestFor: 'Complex multi-agent workflows',
-        icon: '🤝'
-    },
-    {
-        id: 'langgraph',
-        name: 'LangGraph',
-        description: 'Stateful multi-actor applications',
-        language: 'Python',
-        size: '507812',
-        repo: 'langchain-ai/langgraph',
-        website: 'https://github.com/langchain-ai/langgraph',
-        bestFor: 'Graph-based workflows',
-        icon: '🔗'
-    },
-    {
-        id: 'interpreter',
-        name: 'Open Interpreter',
-        description: 'Code execution agent',
-        language: 'Python',
-        size: '100533',
-        repo: 'openinterpreter/open-interpreter',
-        website: 'https://github.com/openinterpreter/open-interpreter',
-        bestFor: 'Code execution, data analysis',
-        icon: '💻'
+        id: 'clawhub',
+        name: 'ClawHub',
+        owner: 'openclaw',
+        repo: 'clawhub',
+        description: 'Skill registry for Claw family agents',
+        language: 'TypeScript',
+        bestFor: 'Finding and managing skills',
+        url: 'https://github.com/openclaw/clawhub',
+        docs: 'https://clawhub.ai'
     }
 ];
 
-// Fallback stats for offline mode
+// Fallback stats (for offline mode)
 const fallbackStats = {
-    'openai/swarm': { stars: 20976, forks: 2235 },
-    'nanobot-ai/nanobot': { stars: 1014, forks: 148 },
-    'gptscript-ai/gptscript': { stars: 3268, forks: 292 },
-    'microsoft/autogen': { stars: 54648, forks: 8229 },
-    'langchain-ai/langgraph': { stars: 24844, forks: 4342 },
-    'openinterpreter/open-interpreter': { stars: 62251, forks: 5354 }
+    openclaw: { stars: 211390, forks: 39138, size: 208130 },
+    picoclaw: { stars: 16333, forks: 1864, size: 17059 },
+    zeroclaw: { stars: 14911, forks: 1559, size: 7400 },
+    nanobot: { stars: 1014, forks: 148, size: 3007 },
+    clawhub: { stars: 2351, forks: 541, size: 1881 }
 };
 
-// Cache duration: 1 hour
-const CACHE_DURATION = 60 * 60 * 1000;
-
-// Initialize
-document.addEventListener('DOMContentLoaded', async () => {
-    updateLastUpdated();
-    
-    try {
-        const stats = await fetchStats();
-        renderFrameworks(stats);
-        renderComparisonTable(stats);
-        updateLiveIndicator(true, stats);
-    } catch (error) {
-        console.warn('Using fallback stats:', error.message);
-        renderFrameworks(fallbackStats);
-        renderComparisonTable(fallbackStats);
-        updateLiveIndicator(false, fallbackStats);
-    }
-});
-
-// Update last updated time
-function updateLastUpdated() {
-    const now = new Date();
-    document.getElementById('lastUpdated').textContent = now.toLocaleString();
+// Format numbers with commas
+function formatNumber(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// Fetch stats from GitHub API with caching
-async function fetchStats() {
-    // Check cache first
-    const cached = localStorage.getItem('frameworkStats');
-    if (cached) {
-        const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-            console.log('Using cached stats from', new Date(timestamp).toLocaleString());
-            updateLiveIndicator(true, data, true);
-            return data;
-        }
+// Format size in KB/MB/GB
+function formatSize(kb) {
+    if (kb >= 1048576) {
+        return (kb / 1048576).toFixed(1) + ' GB';
+    } else if (kb >= 1024) {
+        return (kb / 1024).toFixed(1) + ' MB';
     }
+    return kb + ' KB';
+}
 
-    // Fetch from GitHub API
+// Get color based on star count
+function getStarColor(stars) {
+    if (stars >= 100000) return '#FFD700'; // Gold
+    if (stars >= 10000) return '#C0C0C0'; // Silver
+    if (stars >= 1000) return '#CD7F32'; // Bronze
+    return '#4CAF50'; // Green
+}
+
+// Fetch stats from GitHub API
+async function fetchGitHubStats() {
     const stats = {};
     const errors = [];
-
+    
     for (const framework of frameworks) {
         try {
-            const response = await fetch(`https://api.github.com/repos/${framework.repo}`);
-            if (response.ok) {
-                const data = await response.json();
-                stats[framework.repo] = {
-                    stars: data.stargazers_count,
-                    forks: data.forks_count,
-                    language: data.language
-                };
-            } else {
-                throw new Error(`HTTP ${response.status}`);
-            }
+            const response = await fetch(`https://api.github.com/repos/${framework.owner}/${framework.repo}`);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            
+            const data = await response.json();
+            stats[framework.id] = {
+                stars: data.stargazers_count,
+                forks: data.forks_count,
+                size: data.size,
+                updated: data.updated_at
+            };
         } catch (error) {
-            console.warn(`Failed to fetch ${framework.repo}:`, error);
-            errors.push(framework.repo);
-            // Use fallback for failed repos
-            if (fallbackStats[framework.repo]) {
-                stats[framework.repo] = fallbackStats[framework.repo];
-            }
+            console.warn(`Failed to fetch ${framework.id}:`, error.message);
+            errors.push(framework.id);
+            stats[framework.id] = fallbackStats[framework.id];
         }
     }
-
-    // Cache the results
-    localStorage.setItem('frameworkStats', JSON.stringify({
-        data: stats,
-        timestamp: Date.now()
-    }));
-
-    return stats;
+    
+    return { stats, errors };
 }
 
-// Render framework cards
-function renderFrameworks(stats) {
+// Update framework grid
+function updateFrameworkGrid(stats) {
     const grid = document.getElementById('frameworkGrid');
-    
-    grid.innerHTML = frameworks.map(fw => {
-        const stat = stats[fw.repo] || { stars: 'N/A', forks: 'N/A' };
-        const formattedSize = formatSize(fw.size);
-        
+    grid.innerHTML = frameworks.map(f => {
+        const s = stats[f.id];
         return `
-            <div class="framework-card" id="${fw.id}">
-                <div class="framework-icon">${fw.icon}</div>
-                <h3 class="framework-name">${fw.name}</h3>
-                <p class="framework-description">${fw.description}</p>
+            <div class="framework-card" id="${f.id}">
+                <div class="framework-header">
+                    <h3>${f.name}</h3>
+                    <span class="framework-lang">${f.language}</span>
+                </div>
+                <p class="framework-desc">${f.description}</p>
                 <div class="framework-stats">
                     <div class="stat">
                         <span class="stat-icon">⭐</span>
-                        <span class="stat-value">${formatNumber(stat.stars)}</span>
+                        <span class="stat-value">${formatNumber(s.stars)}</span>
                         <span class="stat-label">stars</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-icon">🔱</span>
-                        <span class="stat-value">${formatNumber(stat.forks)}</span>
+                        <span class="stat-icon">🍴</span>
+                        <span class="stat-value">${formatNumber(s.forks)}</span>
                         <span class="stat-label">forks</span>
                     </div>
+                    <div class="stat">
+                        <span class="stat-icon">📦</span>
+                        <span class="stat-value">${formatSize(s.size)}</span>
+                        <span class="stat-label">size</span>
+                    </div>
                 </div>
-                <div class="framework-details">
-                    <span class="framework-language">${fw.language}</span>
-                    <span class="framework-size">${formattedSize}</span>
+                <div class="framework-links">
+                    <a href="${f.url}" target="_blank" class="btn btn-primary">GitHub</a>
+                    <a href="${f.docs}" target="_blank" class="btn btn-secondary">Docs</a>
                 </div>
-                <a href="${fw.website}" target="_blank" class="framework-link">
-                    View on GitHub →
-                </a>
             </div>
         `;
     }).join('');
 }
 
-// Render comparison table
-function renderComparisonTable(stats) {
-    const tbody = document.querySelector('#comparisonTable tbody');
-    
-    tbody.innerHTML = frameworks.map(fw => {
-        const stat = stats[fw.repo] || { stars: 'N/A', forks: 'N/A' };
-        const formattedSize = formatSize(fw.size);
-        
+// Update comparison table
+function updateComparisonTable(stats) {
+    const table = document.getElementById('comparisonTable');
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = frameworks.map(f => {
+        const s = stats[f.id];
         return `
             <tr>
-                <td><strong>${fw.icon} ${fw.name}</strong></td>
-                <td>${formatNumber(stat.stars)}</td>
-                <td>${formatNumber(stat.forks)}</td>
-                <td><span class="language-badge ${fw.language.toLowerCase()}">${fw.language}</span></td>
-                <td>${formattedSize}</td>
-                <td>${fw.bestFor}</td>
+                <td><a href="${f.url}" target="_blank">${f.name}</a></td>
+                <td><span style="color: ${getStarColor(s.stars)}">${formatNumber(s.stars)}</span></td>
+                <td>${formatNumber(s.forks)}</td>
+                <td>${f.language}</td>
+                <td>${formatSize(s.size)}</td>
+                <td>${f.bestFor}</td>
             </tr>
         `;
     }).join('');
 }
 
 // Update live indicator
-function updateLiveIndicator(isLive, stats, isCached = false) {
+function updateLiveIndicator(errors, isLive) {
     const indicator = document.getElementById('liveIndicator');
-    const statusText = indicator.querySelector('.status-text');
+    const dot = indicator.querySelector('.status-dot');
+    const text = indicator.querySelector('.status-text');
     
-    if (isCached) {
-        statusText.textContent = 'Live data (cached)';
-    } else if (isLive) {
-        statusText.textContent = 'Live data';
+    if (isLive && errors.length === 0) {
+        dot.style.background = '#4CAF50';
+        text.textContent = 'Live from GitHub';
+    } else if (errors.length > 0) {
+        dot.style.background = '#FFC107';
+        text.textContent = 'Partial (cached)';
     } else {
-        statusText.textContent = 'Offline mode';
+        dot.style.background = '#9E9E9E';
+        text.textContent = 'Cached (offline)';
     }
 }
 
-// Format large numbers
-function formatNumber(num) {
-    if (typeof num !== 'number') return num;
-    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-    return num.toString();
+// Update last updated time
+function updateLastUpdated() {
+    const now = new Date();
+    const formatted = now.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    document.getElementById('lastUpdated').textContent = formatted;
 }
 
-// Format repository size
-function formatSize(kb) {
-    const num = parseInt(kb, 10);
-    if (num >= 1024 * 1024) return (num / (1024 * 1024)).toFixed(1) + ' GB';
-    if (num >= 1024) return (num / 1024).toFixed(1) + ' MB';
-    return num + ' KB';
+// Check cache and fetch stats
+async function init() {
+    const cacheKey = 'clawFamilyStats';
+    const cacheAgeKey = 'clawFamilyStatsAge';
+    const CACHE_DURATION = 3600000; // 1 hour in milliseconds
+    
+    let stats = fallbackStats;
+    let isLive = false;
+    let errors = [];
+    
+    // Check cache
+    const cachedStats = localStorage.getItem(cacheKey);
+    const cachedAge = localStorage.getItem(cacheAgeKey);
+    const now = Date.now();
+    
+    if (cachedStats && cachedAge && (now - parseInt(cachedAge) < CACHE_DURATION)) {
+        console.log('Using cached stats');
+        stats = JSON.parse(cachedStats);
+        isLive = false;
+        
+        // Fetch in background
+        fetchGitHubStats().then(({ stats: freshStats, errors: freshErrors }) => {
+            if (freshErrors.length === 0) {
+                localStorage.setItem(cacheKey, JSON.stringify(freshStats));
+                localStorage.setItem(cacheAgeKey, now.toString());
+                updateFrameworkGrid(freshStats);
+                updateComparisonTable(freshStats);
+                updateLiveIndicator(freshErrors, true);
+            }
+        });
+    } else {
+        console.log('Fetching fresh stats');
+        try {
+            const result = await fetchGitHubStats();
+            stats = result.stats;
+            errors = result.errors;
+            isLive = errors.length === 0;
+            
+            if (errors.length < frameworks.length) {
+                localStorage.setItem(cacheKey, JSON.stringify(stats));
+                localStorage.setItem(cacheAgeKey, now.toString());
+            }
+        } catch (error) {
+            console.error('Failed to fetch stats:', error);
+            errors = frameworks.map(f => f.id);
+            isLive = false;
+        }
+    }
+    
+    updateFrameworkGrid(stats);
+    updateComparisonTable(stats);
+    updateLiveIndicator(errors, isLive);
+    updateLastUpdated();
 }
 
-// Export for testing
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { frameworks, fetchStats, formatNumber, formatSize };
-}
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', init);
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});

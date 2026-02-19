@@ -1,210 +1,279 @@
-# AI Agent Frameworks Microsite
+# 🦞 The Claw Family - AI Agent Frameworks Guide
 
-A modern, auto-updating comparison website for popular AI agent frameworks. Helps developers choose the right framework for building personal AI assistants.
+A comprehensive guide to the open-source AI agent frameworks known collectively as "The Claw Family."
+
+![GitHub stars](https://img.shields.io/badge/OpenClaw-211%2C390%20⭐-ffcd3c?logo=github)
+![GitHub stars](https://img.shields.io/badge/PicoClaw-16%2C333%20⭐-9e9e9e?logo=github)
+![GitHub stars](https://img.shields.io/badge/ZeroClaw-14%2C911%20⭐-ff5722?logo=github)
 
 ## 🚀 Live Demo
 
-Deploy to Cloudflare Pages: `npm run deploy:cloudflare`
+Visit the microsite: [https://ccagentorg.github.io/ai-agent-frameworks/](https://ccagentorg.github.io/ai-agent-frameworks/)
 
-## ✨ Features
+The site features:
+- **Auto-updating GitHub stats** via GitHub API
+- **Animated infographics** visualizing comparisons
+- **Quick start guides** for each framework
+- **Security advisories** with real incident documentation
 
-- **Auto-updating GitHub stats** - Live stars, forks, and repository sizes
-- **Smart caching** - 1-hour localStorage cache with offline fallback
-- **Responsive design** - Mobile-first dark theme
-- **Interactive comparisons** - Side-by-side framework comparison
-- **Quick start guide** - Scenario-based recommendations
-- **Animated infographics** - Visual comparisons of metrics
-- **Security advisory** - Best practices for AI agent deployment
-
-## 📊 Featured Frameworks
+## 📊 The Claw Family
 
 | Framework | Stars | Language | Size | Best For |
 |-----------|-------|----------|------|----------|
-| OpenAI Swarm | ~21K | Python | 499 KB | Simple multi-agent orchestration |
-| nanobot | ~1K | Python | 33 KB | Personal chat assistants |
-| GPTScript | ~3K | Go | 5.2 MB | Enterprise scripting |
-| AutoGen | ~55K | Python | 148 MB | Complex multi-agent workflows |
-| LangGraph | ~25K | Python | 508 MB | Graph-based workflows |
-| Open Interpreter | ~62K | Python | 100 MB | Code execution |
-
-## 🛠️ Tech Stack
-
-- **HTML5** - Semantic markup
-- **CSS3** - Custom dark theme, no frameworks
-- **JavaScript** - Vanilla JS, GitHub API integration
-- **GitHub API** - Live stats fetching
-- **Cloudflare Pages** - Recommended deployment
-
-## 📦 Installation
-
-```bash
-# Clone or download this repo
-cd claw-microsite
-
-# Install dependencies
-npm install
-```
+| [OpenClaw](https://github.com/openclaw/openclaw) | 211,390 ⭐ | TypeScript | 208 MB | Full-featured personal AI |
+| [PicoClaw](https://github.com/sipeed/picoclaw) | 16,333 ⭐ | Go | 17 MB | Running on $10 hardware |
+| [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) | 14,911 ⭐ | Rust | 7.4 MB | Production security |
+| [nanobot](https://github.com/nanobot-ai/nanobot) | 1,014 ⭐ | Go/Python | 3 MB | WhatsApp/Telegram bots |
+| [ClawHub](https://github.com/openclaw/clawhub) | 2,351 ⭐ | TypeScript | 1.9 MB | Finding AI skills |
 
 ## 🎯 Quick Start
 
-```bash
-# Local development (serves on http://localhost:3000)
-npm start
-
-# Check that infographics exist
-npm run check:infographics
-
-# Build and verify everything
-npm run build
-
-# Test GitHub API connectivity
-npm run test
-```
-
-## 🚀 Deployment
-
-### Cloudflare Pages (Recommended)
+### OpenClaw - Full-Featured Personal AI
 
 ```bash
-# Option 1: Direct deploy
-npm install -g wrangler
-wrangler login
-wrangler pages deploy . --project-name=ai-agent-frameworks
+# Install
+curl -fsSL https://openclaw.ai/install.sh | bash
 
-# Option 2: GitHub auto-deploy
-# 1. Create repo and push
-# 2. Add secrets in Cloudflare: CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID
-# 3. Enable Cloudflare Pages in your repo settings
+# Initialize
+openclaw init my-assistant
+
+# Start gateway
+openclaw gateway start
 ```
 
-### Vercel
+**Best for:** Complete personal AI setup with multi-channel support (WhatsApp, Telegram, Discord, Slack, etc.)
+
+### PicoClaw - Ultra-Lightweight Go Agent
 
 ```bash
-npm install -g vercel
-vercel link
-vercel --prod
+# Download binary
+wget https://github.com/sipeed/picoclaw/releases/latest/download/picoclaw-linux-arm64
+chmod +x picoclaw-linux-arm64
+./picoclaw-linux-arm64
 ```
 
-### Netlify
+**Best for:** Running on Raspberry Pi Zero, old phones, embedded devices (<10MB RAM)
+
+### ZeroClaw - Security-First Rust Runtime
 
 ```bash
-npm install -g netlify-cli
-netlify login
-netlify deploy --prod
+# Install via Cargo
+cargo install zeroclaw
+
+# Or use pre-built binary
+curl -fsSL https://zeroclaw.net/install.sh | bash
+
+# Start daemon
+zeroclad daemon start
 ```
 
-### GitHub Pages
+**Best for:** Production, security-critical deployments (400x faster startup)
+
+### nanobot - Minimal Chat Bot Assistant
 
 ```bash
-# Configure gh-pages in package.json
-npm run deploy:gh-pages
+# Install
+pip install nanobot-ai
+
+# Initialize
+nanobot init my-bot
+
+# Run
+nanobot run
 ```
 
-## 📁 File Structure
+**Best for:** Simple WhatsApp/Telegram bots with minimal setup
+
+### ClawHub - Skill Registry
+
+```bash
+# Search skills
+clawhub search "weather forecast"
+
+# Install
+clawhub install weather-skill
+
+# List installed
+clawhub list
+```
+
+**Best for:** Extending any Claw framework with 5,700+ community skills
+
+## 🛡️ Security Considerations
+
+### Moltbook Database Exposure (January 2026)
+A public Moltbook instance exposed user data due to misconfigured database settings.
+
+**Mitigation:** Always use `openclaw doctor` to audit configuration before deployment.
+
+### "What Would Elon Do?" Malicious Skill
+A skill in ClawHub was found to silently collect user data.
+
+**Mitigation:** Review skill code before installing, especially from untrusted authors.
+
+### General Security Tips
+- Review tool permissions carefully
+- Use sandboxed environments for code execution
+- Store API keys in environment variables
+- Audit agent logs regularly
+- Install security updates promptly
+
+## 📜 History Timeline
+
+- **2024 Q4** - Clawd created by Peter Steinberger
+- **2025 January** - Clawd renamed to Moltbot (lobster theme)
+- **2025 January 27** - Moltbot goes viral (100K+ stars in weeks)
+- **2025 January 29** - Anthropic trademark claim → renamed to OpenClaw
+- **2025 February 15** - Peter Steinberger joins OpenAI (Reuters, CNBC)
+- **2025 Q2** - PicoClaw launches (Go-based, <10MB)
+- **2025 Q3** - ZeroClaw launches (Rust-based, security-first)
+- **2025 Q4** - ClawHub reaches 5,000+ skills
+- **2026** - OpenClaw reaches 200K+ stars, ecosystem continues to grow
+
+## 🧩 ClawHub Skills
+
+ClawHub hosts **5,700+ community-built skills** for the Claw family:
+
+```bash
+# Popular skills
+clawhub install weather-skill          # Weather forecasts
+clawhub install calendar-skill         # Calendar management
+clawhub install github-skill           # GitHub operations
+clawhub install spotify-skill          # Music control
+clawhub install code-review-skill      # Code review assistance
+```
+
+Visit [ClawHub](https://clawhub.ai) to browse all skills.
+
+## 🔗 Resources
+
+### Official Documentation
+- [OpenClaw](https://openclaw.ai) - Full-featured personal AI
+- [PicoClaw](https://picoclaw.ai) - Ultra-lightweight agent
+- [ZeroClaw](https://zeroclaw.net) - Security-first runtime
+- [nanobot](https://github.com/nanobot-ai/nanobot) - Minimalist assistant
+- [ClawHub](https://clawhub.ai) - Skill registry
+
+### GitHub Repositories
+- [openclaw/openclaw](https://github.com/openclaw/openclaw)
+- [sipeed/picoclaw](https://github.com/sipeed/picoclaw)
+- [zeroclaw-labs/zeroclaw](https://github.com/zeroclaw-labs/zeroclaw)
+- [nanobot-ai/nanobot](https://github.com/nanobot-ai/nanobot)
+- [openclaw/clawhub](https://github.com/openclaw/clawhub)
+
+### Community
+- [OpenClaw Discussions](https://github.com/openclaw/openclaw/discussions)
+- [OpenClaw Discord](https://discord.gg/openclaw)
+- [ClawHub Skills](https://clawhub.ai/skills)
+
+## 💻 Development
+
+### Local Development
+
+```bash
+# Clone repository
+git clone https://github.com/CCAgentOrg/ai-agent-frameworks.git
+cd ai-agent-frameworks
+
+# Serve locally (Python 3)
+python -m http.server 8000
+
+# Or use Node.js
+npx http-server -p 8000
+
+# Open http://localhost:8000
+```
+
+### Project Structure
 
 ```
 claw-microsite/
 ├── index.html              # Main site
-├── styles.css              # Responsive dark theme
-├── script.js               # Auto-update logic
-├── llm.txt                 # AI assistant context
-├── stats.json              # Fallback stats (offline mode)
-├── package.json            # NPM scripts
+├── styles.css              # Dark theme CSS
+├── script.js               # GitHub API integration
+├── llm.txt                 # AI context file
+├── stats.json              # Fallback GitHub stats
 ├── README.md               # This file
-├── DEPLOYMENT.md           # Detailed deployment guide
-├── _headers                # Cloudflare headers
-├── _redirects              # Cloudflare redirects
-├── wrangler.toml           # Cloudflare Workers config
-├── vercel.json             # Vercel config
-├── netlify.toml            # Netlify config
-├── claw-stars-verified.gif     # Stars comparison
-├── claw-size-verified.gif      # Size comparison
-├── claw-timeline-verified.gif  # Timeline
-├── claw-features-verified.gif  # Features
-└── scripts/
-    ├── check-infographics.js
-    ├── check-pages-domains.sh
-    ├── fresh-stats.js
-    └── test-api.js
+├── .nojekyll               # GitHub Pages fix
+└── *-verified.gif          # Animated infographics (5 files)
 ```
 
-## 🔧 Configuration
+### NPM Scripts
 
-### Adding New Frameworks
+```bash
+# Check domain availability
+npm run check:domains
 
-Edit `script.js` and add to the `frameworks` array:
+# Generate infographics
+bash generate-infographics.sh
 
-```javascript
-{
-    id: 'myframework',
-    name: 'My Framework',
-    description: 'Description here',
-    language: 'TypeScript',
-    size: '10000',
-    repo: 'org/myframework',
-    website: 'https://github.com/org/myframework',
-    bestFor: 'Use case here',
-    icon: '🚀'
-}
+# Test GitHub API
+npm run test:api
 ```
 
-### Customizing Theme
+## 📦 Deployment
 
-Edit `styles.css` and update CSS variables:
+The site is deployed to GitHub Pages:
 
-```css
-:root {
-    --primary: #6366f1;
-    --bg-dark: #0f172a;
-    --bg-card: #1e293b;
-    /* ... */
-}
+**URL:** https://ccagentorg.github.io/ai-agent-frameworks/
+
+### Deploy to GitHub Pages
+
+```bash
+# Push to main branch - auto-deploys via GitHub Actions
+git add .
+git commit -m "Update site"
+git push origin main
 ```
 
-## 📊 GitHub API Limits
+### Alternative Deployment Platforms
 
-The GitHub API has rate limits:
-- **Unauthenticated**: 60 requests/hour
-- **Authenticated**: 5,000 requests/hour
-
-To use authenticated requests, create a GitHub token and add to `script.js`:
-
-```javascript
-const response = await fetch(`https://api.github.com/repos/${framework.repo}`, {
-    headers: {
-        'Authorization': `token YOUR_GITHUB_TOKEN`
-    }
-});
+#### Vercel
+```bash
+npm install -g vercel
+vercel --prod
 ```
 
-## 🔒 Security
+#### Netlify
+```bash
+npm install -g netlify-cli
+netlify deploy --prod
+```
 
-AI agents execute code and access data. Always:
-- Review tool permissions carefully
-- Sandbox code execution environments
-- Use environment variables for API keys
-- Implement rate limiting
-- Audit agent logs regularly
+#### Cloudflare Pages
+```bash
+npm install -g wrangler
+wrangler pages deploy . --project-name=claw-microsite
+```
 
-## 🤝 Contributing
+## 🤖 AI Context
 
-Contributions welcome! Feel free to:
-- Add new frameworks
-- Improve documentation
-- Fix bugs
-- Enhance design
+This project includes an `llm.txt` file for AI assistants. When contributing or maintaining this project:
+
+- Always verify GitHub stats using the GitHub API
+- Security incidents are documented in the site's Security section
+- The Claw family includes OpenClaw, PicoClaw, ZeroClaw, nanobot, and ClawHub
+- All frameworks share the "personal AI ownership" philosophy
 
 ## 📄 License
 
-MIT License - Feel free to use for your own projects!
+This microsite content is licensed under MIT License.
 
-## 🔗 Resources
+The Claw family frameworks are open-source with various licenses:
+- OpenClaw: MIT License
+- PicoClaw: MIT License  
+- ZeroClaw: MIT License
+- nanobot: MIT License
+- ClawHub: MIT License
 
-- [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+## 🙏 Acknowledgments
+
+- The Claw family community for building amazing open-source AI tools
+- [x-gif-maker](https://github.com/nanobot-ai/x-gif-maker) for animated infographics
+- GitHub API for live statistics
 
 ---
 
-**Made with ❤️ for the AI agent community**
+**Built with ❤️ for the AI agent community**
+
+🦞 The Claw Family - Open-Source AI Agent Frameworks
