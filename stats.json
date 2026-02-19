@@ -32,13 +32,13 @@
     },
     "nanobot": {
       "name": "nanobot",
-      "owner": "nanobot-ai",
+      "owner": "HKUDS",
       "repo": "nanobot",
-      "stars": 1014,
-      "forks": 148,
-      "language": "Go",
-      "size": 3007,
-      "description": "Build MCP Agents - MCP host for AI agents"
+      "stars": 0,
+      "forks": 0,
+      "language": "Python",
+      "size": 4000,
+      "description": "Ultra-lightweight personal AI assistant (~4,000 LOC)"
     },
     "clawhub": {
       "name": "ClawHub",

@@ -4,7 +4,7 @@ This file provides AI assistants with context about The Claw Family microsite pr
 
 ## Project Overview
 
-The Claw Family microsite (https://ccagentorg.github.io/ai-agent-frameworks/) is a comprehensive guide to the open-source AI agent frameworks known collectively as "The Claw Family."
+The Claw Family microsite (https://ccagentorg.github.io/claw-family/) is a comprehensive guide to the open-source AI agent frameworks known collectively as "The Claw Family."
 
 ## The Claw Family Frameworks
 
@@ -47,17 +47,18 @@ The Claw Family microsite (https://ccagentorg.github.io/ai-agent-frameworks/) is
   - Command: `git clone && ./bootstrap.sh` or `cargo install zeroclaw`
 
 ### nanobot
-- **GitHub:** https://github.com/nanobot-ai/nanobot
-- **Stars:** 1,014
-- **Language:** Go
-- **Size:** 3 MB
-- **Description:** Build MCP Agents - MCP host for AI agents
+- **GitHub:** https://github.com/HKUDS/nanobot
+- **Stars:** ? (check GitHub API)
+- **Language:** Python ≥3.11
+- **Size:** ~4,000 LOC (99% smaller than OpenClaw)
+- **Description:** Ultra-lightweight personal AI assistant
 - **Key Features:**
-  - Standalone MCP host for building AI agents
-  - Integrates MCP servers with LLMs
-  - Web UI at http://localhost:8080
-  - Supports OpenAI and Anthropic models
-  - Command: `brew install nanobot-ai/tap/nanobot` then `nanobot run ./nanobot.yaml`
+  - Multiple channels: Telegram, Discord, WhatsApp, Slack, Email, QQ, DingTalk, Feishu
+  - 13+ LLM providers (OpenRouter, Anthropic, OpenAI, DeepSeek, Groq, etc.)
+  - MCP (Model Context Protocol) support
+  - Skills system
+  - Docker support
+  - Command: `pip install nanobot-ai` or `uv tool install nanobot-ai` then `nanobot onboard`
 
 ### ClawHub
 - **GitHub:** https://github.com/openclaw/clawhub
@@ -78,7 +79,7 @@ The Claw Family microsite (https://ccagentorg.github.io/ai-agent-frameworks/) is
 - **Data Source:** GitHub API (with localStorage caching)
 - **Deployment:** GitHub Pages
 - **Organization:** CCAgentOrg
-- **Repository:** ai-agent-frameworks
+- **Repository:** claw-family
 
 ## Microsite Features
 
@@ -134,7 +135,7 @@ Key principles:
 | Full-featured personal AI | OpenClaw |
 | Running on $10 hardware | PicoClaw |
 | Production security | ZeroClaw |
-| Building MCP agents | nanobot |
+| Ultra-lightweight Python assistant | nanobot |
 | Finding skills | ClawHub |
 
 ## File Structure
@@ -174,4 +175,4 @@ When assisting with this project:
 - The Claw family includes OpenClaw, PicoClaw, ZeroClaw, nanobot, and ClawHub
 - All frameworks are open-source and share the "personal AI ownership" philosophy
 - GitHub org: CCAgentOrg
-- Repo: ai-agent-frameworks
+- Repo: claw-family

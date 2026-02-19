@@ -46,7 +46,7 @@
                 <li><strong>OpenClaw</strong> - Full-featured personal AI assistant (200K+ GitHub stars)</li>
                 <li><strong>PicoClaw</strong> - Ultra-lightweight Go agent for embedded devices</li>
                 <li><strong>ZeroClaw</strong> - Rust-based, security-first runtime</li>
-                <li><strong>nanobot</strong> - Go-based MCP host for building AI agents</li>
+                <li><strong>nanobot</strong> - Ultra-lightweight Python assistant (~4,000 LOC)</li>
                 <li><strong>ClawHub</strong> - The skill registry powering the ecosystem</li>
             </ul>
         </section>
@@ -94,12 +94,13 @@
                     <h3>🦞 I want a full-featured personal AI assistant</h3>
                     <p><strong>Best choice:</strong> <a href="#openclaw" class="framework-link">OpenClaw</a></p>
                     <ul>
+                        <li>TypeScript-based, full-featured personal AI assistant</li>
                         <li>Multi-channel support (WhatsApp, Telegram, Discord, etc.)</li>
                         <li>Multi-agent routing with isolated workspaces</li>
                         <li>Tool system with 5,700+ community skills via ClawHub</li>
                         <li>Local-first gateway architecture</li>
                     </ul>
-                    <pre><code># Install OpenClaw (requires Node >= 22)
+                    <pre><code># Install OpenClaw (requires Node.js >= 22)
 npm install -g openclaw@latest
 
 # Run onboarding wizard
@@ -115,13 +116,14 @@ openclaw gateway --port 18789</code></pre>
                     <ul>
                         <li>Go-based, ultra-lightweight (<10MB RAM)</li>
                         <li>Runs on Raspberry Pi Zero, old Android phones, embedded Linux</li>
-                        <li>95% AI-generated code with human refinement</li>
+                        <li>Single self-contained binary</li>
                         <li>Fast boot times (~1 second)</li>
+                        <li>Chat apps: Telegram, Discord, QQ, DingTalk, LINE</li>
                     </ul>
                     <pre><code># Download binary from releases
-wget https://github.com/sipeed/picoclaw/releases/latest/download/picoclaw-linux-amd64
-chmod +x picoclaw-linux-amd64
-./picoclaw-linux-amd64
+wget https://github.com/sipeed/picoclaw/releases/download/v0.1.1/picoclaw-linux-arm64
+chmod +x picoclaw-linux-arm64
+./picoclaw-linux-arm64
 
 # Or build from source
 git clone https://github.com/sipeed/picoclaw.git
@@ -133,10 +135,12 @@ make build</code></pre>
                     <h3>🔒 I need security-first, production-grade infrastructure</h3>
                     <p><strong>Best choice:</strong> <a href="#zeroclaw" class="framework-link">ZeroClaw</a></p>
                     <ul>
-                        <li>Rust-based, 400x faster startup than alternatives</li>
-                        <li>Memory-safe, sandboxed execution</li>
+                        <li>Rust-based, memory-safe runtime</li>
+                        <li><5MB RAM, 400x faster startup than OpenClaw</li>
                         <li>Zero-trust architecture with explicit permissions</li>
-                        <li>Runs on $10 hardware with <5MB RAM</li>
+                        <li>Trait-driven architecture (swap providers, channels, tools)</li>
+                        <li>Full-stack search engine (vector + keyword)</li>
+                        <li>Security-by-design (pairing, sandboxing, allowlists)</li>
                     </ul>
                     <pre><code># Clone and bootstrap
 git clone https://github.com/zeroclaw-labs/zeroclaw.git
@@ -147,26 +151,39 @@ cd zeroclaw
 cargo install zeroclaw
 
 # Run onboarding
-zeroclad onboard</code></pre>
+zeroclaw onboard --api-key sk-... --provider openrouter
+
+# Chat
+zeroclaw agent -m "Hello, ZeroClaw!"
+
+# Start gateway
+zeroclaw gateway</code></pre>
                 </div>
 
                 <div class="scenario">
-                    <h3>🤖 I want to build MCP agents and hosts</h3>
+                    <h3>🐈 I want a lightweight AI assistant (Python)</h3>
                     <p><strong>Best choice:</strong> <a href="#nanobot" class="framework-link">nanobot</a></p>
                     <ul>
-                        <li>Go-based MCP host for building AI agents</li>
-                        <li>Standalone deployment - integrate into any application</li>
-                        <li>Supports OpenAI and Anthropic models</li>
-                        <li>Configurable via YAML or directory-based structure</li>
-                        <li>Web UI at http://localhost:8080</li>
+                        <li>Python-based, ~4,000 LOC (99% smaller than OpenClaw)</li>
+                        <li>Multiple channels: Telegram, Discord, WhatsApp, Slack, Email, QQ, DingTalk, Feishu</li>
+                        <li>13+ LLM providers (OpenRouter, Anthropic, OpenAI, DeepSeek, Groq, etc.)</li>
+                        <li>MCP (Model Context Protocol) support</li>
+                        <li>Skills system for extensibility</li>
+                        <li>Docker support</li>
                     </ul>
-                    <pre><code># Install nanobot
-brew install nanobot-ai/tap/nanobot
+                    <pre><code># Install nanobot (Python >= 3.11)
+pip install nanobot-ai
+# or
+uv tool install nanobot-ai
 
-# Create configuration (nanobot.yaml)
-nanobot run ./nanobot.yaml
+# Initialize and configure
+nanobot onboard
 
-# Web UI available at http://localhost:8080</code></pre>
+# Chat with agent
+nanobot agent
+
+# Start gateway for chat platforms
+nanobot gateway</code></pre>
                 </div>
 
                 <div class="scenario">
@@ -248,7 +265,7 @@ clawhub list</code></pre>
                     </tr>
                     <tr>
                         <td>nanobot</td>
-                        <td>Go</td>
+                        <td>Python</td>
                         <td>⚠️ Optional</td>
                         <td>✅ Yes</td>
                         <td>✅ Yes</td>
@@ -302,7 +319,7 @@ clawhub install code-review-skill      # Code review assistance</code></pre>
                         <li><a href="https://openclaw.ai" target="_blank">OpenClaw Docs</a></li>
                         <li><a href="https://picoclaw.ai" target="_blank">PicoClaw Docs</a></li>
                         <li><a href="https://zeroclaw.net" target="_blank">ZeroClaw Docs</a></li>
-                        <li><a href="https://github.com/nanobot-ai/nanobot" target="_blank">nanobot Docs</a></li>
+                        <li><a href="https://github.com/HKUDS/nanobot" target="_blank">nanobot Docs</a></li>
                         <li><a href="https://clawhub.ai" target="_blank">ClawHub</a></li>
                     </ul>
                 </div>
@@ -312,7 +329,7 @@ clawhub install code-review-skill      # Code review assistance</code></pre>
                         <li><a href="https://github.com/openclaw/openclaw" target="_blank">openclaw/openclaw</a></li>
                         <li><a href="https://github.com/sipeed/picoclaw" target="_blank">sipeed/picoclaw</a></li>
                         <li><a href="https://github.com/zeroclaw-labs/zeroclaw" target="_blank">zeroclaw-labs/zeroclaw</a></li>
-                        <li><a href="https://github.com/nanobot-ai/nanobot" target="_blank">nanobot-ai/nanobot</a></li>
+                        <li><a href="https://github.com/HKUDS/nanobot" target="_blank">HKUDS/nanobot</a></li>
                         <li><a href="https://github.com/openclaw/clawhub" target="_blank">openclaw/clawhub</a></li>
                     </ul>
                 </div>
@@ -382,7 +399,7 @@ clawhub install code-review-skill      # Code review assistance</code></pre>
         <p>🦞 The Claw Family - Open-Source AI Agent Frameworks</p>
         <p>Last updated: <span id="lastUpdated"></span> | Data source: GitHub API</p>
         <div class="footer-links">
-            <a href="https://github.com/CCAgentOrg/ai-agent-frameworks" target="_blank">GitHub</a>
+            <a href="https://github.com/CCAgentOrg/claw-family" target="_blank">GitHub</a>
             <span>|</span>
             <a href="/llm.txt" target="_blank">llm.txt</a>
             <span>|</span>

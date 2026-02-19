@@ -1,7 +1,7 @@
 {
-  "name": "ai-agent-frameworks-microsite",
+  "name": "claw-family-microsite",
   "version": "1.0.0",
-  "description": "A modern, auto-updating comparison website for AI agent frameworks",
+  "description": "The Claw Family - A comprehensive guide to open-source AI agent frameworks",
   "main": "index.html",
   "scripts": {
     "start": "npx serve -p 3000",
@@ -9,7 +9,7 @@
     "check:infographics": "node scripts/check-infographics.js",
     "fetch:stats": "node scripts/fresh-stats.js",
     "test": "node scripts/test-api.js",
-    "deploy:cloudflare": "npx wrangler pages deploy . --project-name=ai-agent-frameworks",
+    "deploy:cloudflare": "npx wrangler pages deploy . --project-name=claw-family",
     "deploy:vercel": "npx vercel",
     "deploy:netlify": "npx netlify deploy --prod",
     "deploy:gh-pages": "npx gh-pages -d ."
@@ -17,14 +17,13 @@
   "keywords": [
     "ai",
     "agents",
-    "frameworks",
-    "comparison",
-    "openai-swarm",
+    "claw-family",
+    "openclaw",
+    "picoclaw",
+    "zeroclaw",
     "nanobot",
-    "gptscript",
-    "autogen",
-    "langgraph",
-    "open-interpreter"
+    "clawhub",
+    "open-source"
   ],
   "author": "",
   "license": "MIT",

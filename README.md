@@ -8,7 +8,7 @@ A comprehensive guide to the open-source AI agent frameworks known collectively 
 
 ## 🚀 Live Demo
 
-Visit the microsite: [https://ccagentorg.github.io/ai-agent-frameworks/](https://ccagentorg.github.io/ai-agent-frameworks/)
+Visit the microsite: [https://ccagentorg.github.io/claw-family/](https://ccagentorg.github.io/claw-family/)
 
 The site features:
 - **Auto-updating GitHub stats** via GitHub API
@@ -23,7 +23,7 @@ The site features:
 | [OpenClaw](https://github.com/openclaw/openclaw) | 211,406 ⭐ | TypeScript | 208 MB | Full-featured personal AI |
 | [PicoClaw](https://github.com/sipeed/picoclaw) | 16,338 ⭐ | Go | 17 MB | Running on $10 hardware |
 | [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) | 14,920 ⭐ | Rust | 7.4 MB | Production security |
-| [nanobot](https://github.com/nanobot-ai/nanobot) | 1,014 ⭐ | Go | 3 MB | Building MCP agents |
+| [nanobot](https://github.com/HKUDS/nanobot) | ? ⭐ | Python | ~4,000 LOC | Ultra-lightweight personal AI assistant |
 | [ClawHub](https://github.com/openclaw/clawhub) | 2,353 ⭐ | TypeScript | 1.9 MB | Finding AI skills |
 
 ## 🎯 Quick Start
@@ -71,19 +71,34 @@ zeroclad onboard
 
 **Best for:** Production, security-critical deployments (<5MB RAM, 400x faster startup)
 
-### nanobot - MCP Host for AI Agents
+### nanobot - Ultra-Lightweight Personal AI Assistant
 
 ```bash
-# Install via Homebrew
-brew install nanobot-ai/tap/nanobot
+# Install with pip (Python >= 3.11)
+pip install nanobot-ai
 
-# Create configuration
-nanobot run ./nanobot.yaml
+# Or install with uv
+uv tool install nanobot-ai
 
-# Web UI available at http://localhost:8080
+# Initialize and configure
+nanobot onboard
+
+# Chat with agent
+nanobot agent
+
+# Start gateway for chat platforms
+nanobot gateway
 ```
 
-**Best for:** Building MCP agents and hosts for AI applications
+**Best for:** Quick prototyping, research, and lightweight AI assistant deployment
+
+**Features:**
+- Multiple channels: Telegram, Discord, WhatsApp, Slack, Email, QQ, DingTalk, Feishu
+- 13+ LLM providers (OpenRouter, Anthropic, OpenAI, DeepSeek, Groq, etc.)
+- MCP (Model Context Protocol) support
+- Skills system
+- Docker support
+- ~4,000 LOC (99% smaller than OpenClaw)
 
 ### ClawHub - Skill Registry
 
@@ -152,14 +167,14 @@ Visit [ClawHub](https://clawhub.ai) to browse all skills.
 - [OpenClaw](https://openclaw.ai) - Full-featured personal AI
 - [PicoClaw](https://picoclaw.ai) - Ultra-lightweight agent
 - [ZeroClaw](https://zeroclaw.net) - Security-first runtime
-- [nanobot](https://github.com/nanobot-ai/nanobot) - Minimalist assistant
+- [nanobot](https://github.com/HKUDS/nanobot) - Ultra-lightweight assistant
 - [ClawHub](https://clawhub.ai) - Skill registry
 
 ### GitHub Repositories
 - [openclaw/openclaw](https://github.com/openclaw/openclaw)
 - [sipeed/picoclaw](https://github.com/sipeed/picoclaw)
 - [zeroclaw-labs/zeroclaw](https://github.com/zeroclaw-labs/zeroclaw)
-- [nanobot-ai/nanobot](https://github.com/nanobot-ai/nanobot)
+- [HKUDS/nanobot](https://github.com/HKUDS/nanobot)
 - [openclaw/clawhub](https://github.com/openclaw/clawhub)
 
 ### Community
@@ -173,8 +188,8 @@ Visit [ClawHub](https://clawhub.ai) to browse all skills.
 
 ```bash
 # Clone repository
-git clone https://github.com/CCAgentOrg/ai-agent-frameworks.git
-cd ai-agent-frameworks
+git clone https://github.com/CCAgentOrg/claw-family.git
+cd claw-family
 
 # Serve locally (Python 3)
 python -m http.server 8000
@@ -216,7 +231,7 @@ npm run test:api
 
 The site is deployed to GitHub Pages:
 
-**URL:** https://ccagentorg.github.io/ai-agent-frameworks/
+**URL:** https://ccagentorg.github.io/claw-family/
 
 ### Deploy to GitHub Pages
 

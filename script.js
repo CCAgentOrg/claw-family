@@ -36,13 +36,13 @@ const frameworks = [
     {
         id: 'nanobot',
         name: 'nanobot',
-        owner: 'nanobot-ai',
+        owner: 'HKUDS',
         repo: 'nanobot',
-        description: 'Minimalist Python assistant for chat platforms',
-        language: 'Go',
-        bestFor: 'WhatsApp/Telegram bots',
-        url: 'https://github.com/nanobot-ai/nanobot',
-        docs: 'https://github.com/nanobot-ai/nanobot'
+        description: 'Ultra-lightweight personal AI assistant (~4,000 LOC)',
+        language: 'Python',
+        bestFor: 'Quick prototyping and research',
+        url: 'https://github.com/HKUDS/nanobot',
+        docs: 'https://github.com/HKUDS/nanobot'
     },
     {
         id: 'clawhub',
@@ -62,7 +62,7 @@ const fallbackStats = {
     openclaw: { stars: 211390, forks: 39138, size: 208130 },
     picoclaw: { stars: 16333, forks: 1864, size: 17059 },
     zeroclaw: { stars: 14911, forks: 1559, size: 7400 },
-    nanobot: { stars: 1014, forks: 148, size: 3007 },
+    nanobot: { stars: 0, forks: 0, size: 4000 },
     clawhub: { stars: 2351, forks: 541, size: 1881 }
 };
 
