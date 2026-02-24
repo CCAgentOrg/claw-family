@@ -1,0 +1,36 @@
+# Claw Family
+
+> The Claw Family is a collection of open-source AI agent frameworks including OpenClaw, PicoClaw, ZeroClaw, ClawHub, and nanobot. This comprehensive guide provides overview, comparisons, and resources for developers working with AI agents.
+
+The Claw Family frameworks share common principles of agent-based AI development while serving different use cases:
+- OpenClaw: General-purpose agent framework
+- PicoClaw: Lightweight agent framework for resource-constrained environments
+- ZeroClaw: Rust-based agent framework focused on performance
+- ClawHub: Public skill registry for discovering and sharing agent skills
+- nanobot: Lightweight Python AI assistant with skill system
+
+## Overview
+
+- [Claw Family Guide](https://ccagentorg.github.io/claw-family/): Main landing page with animated infographics and framework comparison
+- [Framework Comparisons](https://ccagentorg.github.io/claw-family/#frameworks): Side-by-side comparison of all Claw Family frameworks
+- [Getting Started](https://ccagentorg.github.io/claw-family/#getting-started): Quick start guides for each framework
+
+## Documentation
+
+- [OpenClaw Documentation](https://github.com/anomalyco/OpenClaw): General-purpose agent framework docs
+- [PicoClaw Documentation](https://github.com/anomalyco/PicoClaw): Lightweight framework documentation
+- [ZeroClaw Documentation](https://github.com/CCAgentOrg/zeroclaw): Rust agent framework
+- [nanobot Documentation](https://github.com/nanobot-ai/nanobot): Python AI assistant
+
+## Repositories
+
+- [OpenClaw GitHub](https://github.com/anomalyco/OpenClaw): Main OpenClaw repository
+- [PicoClaw GitHub](https://github.com/anomalyco/PicoClaw): Main PicoClaw repository
+- [ZeroClaw GitHub](https://github.com/CCAgentOrg/zeroclaw): ZeroClaw repository maintained by CCAgentOrg
+- [nanobot GitHub](https://github.com/nanobot-ai/nanobot): Official nanobot repository
+- [nanobot-skills](https://github.com/CCAgentOrg/nanobot-skills): Skills repository for nanobot
+
+## Optional
+
+- [nanobot Blog](https://nanobot.srik.me/): Blog posts about nanobot and AI experiments
+- [CCAgentOrg GitHub](https://github.com/CCAgentOrg): Organization page for CCAgentOrg projects
